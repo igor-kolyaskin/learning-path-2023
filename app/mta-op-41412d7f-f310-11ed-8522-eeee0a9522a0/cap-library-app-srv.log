@@ -1,0 +1,176 @@
+#2.0#2023 05 15 11:05:10.829#Z#DEBUG#com.sap.cloud.lm.sl.xs2.41412d7f-f310-11ed-8522-eeee0a9522a0.cap-library-app-srv.startAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-7713###
+[PollStartAppStatusExecution] [cap-library-app-srv] a516dfb2-39ed-474d-b6b9-1dc3d6058009 [2023-05-15T10:46:05.165659] [cds] - GET /library/Currencies (STDOUT, APP/PROC/WEB)#
+
+#2.0#2023 05 15 11:05:10.829#Z#DEBUG#com.sap.cloud.lm.sl.xs2.41412d7f-f310-11ed-8522-eeee0a9522a0.cap-library-app-srv.startAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-7713###
+[PollStartAppStatusExecution] [cap-library-app-srv] a516dfb2-39ed-474d-b6b9-1dc3d6058009 [2023-05-15T10:46:05.251347] 152bfcc3trial-cap-dev-cap-library-app-srv.cfapps.us10-001.hana.ondemand.com - [2023-05-15T10:46:05.160756932Z] "GET /library/Currencies HTTP/2.0" 200 0 1654 "https://152bfcc3trial-cap-dev-cap-library-app-srv.cfapps.us10-001.hana.ondemand.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/113.0.0.0 Safari/537.36" "10.0.72.1:59244" "10.32.2.7:61020" x_forwarded_for:"178.134.230.16, 10.0.72.1" x_forwarded_proto:"https" vcap_request_id:"2746dfbe-312b-4366-45f7-4c2600c57605" response_time:0.090484 gorouter_time:0.000065 app_id:"a516dfb2-39ed-474d-b6b9-1dc3d6058009" app_index:"0" instance_id:"119cd981-ce7b-4a55-7cea-6e34" x_cf_routererror:"-" x_correlationid:"-" tenantid:"-" sap_passport:"-" x_scp_request_id:"c0106759-b800-4f1c-83be-d1a844f15c4f-64620D6C-B5EB6" x_cf_app_instance:"-" x_forwarded_host:"-" x_custom_host:"-" x_ssl_client:"-" x_ssl_client_session_id:"-" x_ssl_client_verify:"-" x_ssl_client_subject_dn:"-" x_ssl_client_subject_cn:"-" x_ssl_client_issuer_dn:"-" x_ssl_client_notbefore:"-" x_ssl_client_notafter:"-" x_cf_forwarded_url:"-" traceparent:"-" x_b3_traceid:"0f50e7795868536401676258a926b5f4" x_b3_spanid:"01676258a926b5f4" x_b3_parentspanid:"-" b3:"0f50e7795868536401676258a926b5f4-01676258a926b5f4" (STDOUT, RTR)#
+
+#2.0#2023 05 15 11:05:10.830#Z#DEBUG#com.sap.cloud.lm.sl.xs2.41412d7f-f310-11ed-8522-eeee0a9522a0.cap-library-app-srv.startAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-7713###
+[PollStartAppStatusExecution] [cap-library-app-srv] a516dfb2-39ed-474d-b6b9-1dc3d6058009 [2023-05-15T10:46:09.337665] [cds] - GET /library/Statuses (STDOUT, APP/PROC/WEB)#
+
+#2.0#2023 05 15 11:05:10.830#Z#DEBUG#com.sap.cloud.lm.sl.xs2.41412d7f-f310-11ed-8522-eeee0a9522a0.cap-library-app-srv.startAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-7713###
+[PollStartAppStatusExecution] [cap-library-app-srv] a516dfb2-39ed-474d-b6b9-1dc3d6058009 [2023-05-15T10:46:09.353974] 152bfcc3trial-cap-dev-cap-library-app-srv.cfapps.us10-001.hana.ondemand.com - [2023-05-15T10:46:09.331861716Z] "GET /library/Statuses HTTP/2.0" 200 0 276 "https://152bfcc3trial-cap-dev-cap-library-app-srv.cfapps.us10-001.hana.ondemand.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/113.0.0.0 Safari/537.36" "10.0.72.1:12102" "10.32.2.7:61020" x_forwarded_for:"178.134.230.16, 10.0.72.1" x_forwarded_proto:"https" vcap_request_id:"7801b7b9-e11b-4a9c-7b6c-ffb174ffc84c" response_time:0.022022 gorouter_time:0.000079 app_id:"a516dfb2-39ed-474d-b6b9-1dc3d6058009" app_index:"0" instance_id:"119cd981-ce7b-4a55-7cea-6e34" x_cf_routererror:"-" x_correlationid:"-" tenantid:"-" sap_passport:"-" x_scp_request_id:"c0106759-b800-4f1c-83be-d1a844f15c4f-64620D6D-B5FBD" x_cf_app_instance:"-" x_forwarded_host:"-" x_custom_host:"-" x_ssl_client:"-" x_ssl_client_session_id:"-" x_ssl_client_verify:"-" x_ssl_client_subject_dn:"-" x_ssl_client_subject_cn:"-" x_ssl_client_issuer_dn:"-" x_ssl_client_notbefore:"-" x_ssl_client_notafter:"-" x_cf_forwarded_url:"-" traceparent:"-" x_b3_traceid:"0342ed51cce9dd3f52fe86a654933002" x_b3_spanid:"52fe86a654933002" x_b3_parentspanid:"-" b3:"0342ed51cce9dd3f52fe86a654933002-52fe86a654933002" (STDOUT, RTR)#
+
+#2.0#2023 05 15 11:05:10.830#Z#DEBUG#com.sap.cloud.lm.sl.xs2.41412d7f-f310-11ed-8522-eeee0a9522a0.cap-library-app-srv.startAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-7713###
+[PollStartAppStatusExecution] [cap-library-app-srv] a516dfb2-39ed-474d-b6b9-1dc3d6058009 [2023-05-15T11:05:02.354651] Stopping app with guid a516dfb2-39ed-474d-b6b9-1dc3d6058009 (STDOUT, API)#
+
+#2.0#2023 05 15 11:05:10.830#Z#DEBUG#com.sap.cloud.lm.sl.xs2.41412d7f-f310-11ed-8522-eeee0a9522a0.cap-library-app-srv.startAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-7713###
+[PollStartAppStatusExecution] [cap-library-app-srv] a516dfb2-39ed-474d-b6b9-1dc3d6058009 [2023-05-15T11:05:02.385709] Cell d89356d5-8b8d-4fb9-b939-143db8dad6d7 stopping instance 119cd981-ce7b-4a55-7cea-6e34 (STDOUT, CELL)#
+
+#2.0#2023 05 15 11:05:10.830#Z#DEBUG#com.sap.cloud.lm.sl.xs2.41412d7f-f310-11ed-8522-eeee0a9522a0.cap-library-app-srv.startAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-7713###
+[PollStartAppStatusExecution] [cap-library-app-srv] a516dfb2-39ed-474d-b6b9-1dc3d6058009 [2023-05-15T11:05:02.745973] Starting app with guid a516dfb2-39ed-474d-b6b9-1dc3d6058009 (STDOUT, API)#
+
+#2.0#2023 05 15 11:05:10.830#Z#DEBUG#com.sap.cloud.lm.sl.xs2.41412d7f-f310-11ed-8522-eeee0a9522a0.cap-library-app-srv.startAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-7713###
+[PollStartAppStatusExecution] [cap-library-app-srv] a516dfb2-39ed-474d-b6b9-1dc3d6058009 [2023-05-15T11:05:02.977416] Cell dd09aa96-af4b-44ce-9a39-e8709217f6a8 creating container for instance afef5ba4-c13b-4b44-77c5-21e5 (STDOUT, CELL)#
+
+#2.0#2023 05 15 11:05:10.830#Z#DEBUG#com.sap.cloud.lm.sl.xs2.41412d7f-f310-11ed-8522-eeee0a9522a0.cap-library-app-srv.startAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-7713###
+[PollStartAppStatusExecution] [cap-library-app-srv] a516dfb2-39ed-474d-b6b9-1dc3d6058009 [2023-05-15T11:05:03.300285] Security group rules were updated (STDOUT, CELL)#
+
+#2.0#2023 05 15 11:05:10.830#Z#DEBUG#com.sap.cloud.lm.sl.xs2.41412d7f-f310-11ed-8522-eeee0a9522a0.cap-library-app-srv.startAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-7713###
+[PollStartAppStatusExecution] [cap-library-app-srv] a516dfb2-39ed-474d-b6b9-1dc3d6058009 [2023-05-15T11:05:03.312532] Cell dd09aa96-af4b-44ce-9a39-e8709217f6a8 successfully created container for instance afef5ba4-c13b-4b44-77c5-21e5 (STDOUT, CELL)#
+
+#2.0#2023 05 15 11:05:10.830#Z#DEBUG#com.sap.cloud.lm.sl.xs2.41412d7f-f310-11ed-8522-eeee0a9522a0.cap-library-app-srv.startAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-7713###
+[PollStartAppStatusExecution] [cap-library-app-srv] a516dfb2-39ed-474d-b6b9-1dc3d6058009 [2023-05-15T11:05:03.937650] Downloading droplet... (STDOUT, CELL)#
+
+#2.0#2023 05 15 11:05:10.830#Z#DEBUG#com.sap.cloud.lm.sl.xs2.41412d7f-f310-11ed-8522-eeee0a9522a0.cap-library-app-srv.startAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-7713###
+[PollStartAppStatusExecution] [cap-library-app-srv] a516dfb2-39ed-474d-b6b9-1dc3d6058009 [2023-05-15T11:05:06.554941] Downloaded droplet (46.9M) (STDOUT, CELL)#
+
+#2.0#2023 05 15 11:05:10.830#Z#DEBUG#com.sap.cloud.lm.sl.xs2.41412d7f-f310-11ed-8522-eeee0a9522a0.cap-library-app-srv.startAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-7713###
+[PollStartAppStatusExecution] [cap-library-app-srv] a516dfb2-39ed-474d-b6b9-1dc3d6058009 [2023-05-15T11:05:06.555036] Starting health monitoring of container (STDOUT, CELL)#
+
+#2.0#2023 05 15 11:05:10.830#Z#DEBUG#com.sap.cloud.lm.sl.xs2.41412d7f-f310-11ed-8522-eeee0a9522a0.cap-library-app-srv.startAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-7713###
+[PollStartAppStatusExecution] [cap-library-app-srv] a516dfb2-39ed-474d-b6b9-1dc3d6058009 [2023-05-15T11:05:07.328725] > cap-library-app@1.0.0 start (STDOUT, APP/PROC/WEB)#
+
+#2.0#2023 05 15 11:05:10.830#Z#DEBUG#com.sap.cloud.lm.sl.xs2.41412d7f-f310-11ed-8522-eeee0a9522a0.cap-library-app-srv.startAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-7713###
+[PollStartAppStatusExecution] [cap-library-app-srv] a516dfb2-39ed-474d-b6b9-1dc3d6058009 [2023-05-15T11:05:07.328740] > cds run (STDOUT, APP/PROC/WEB)#
+
+#2.0#2023 05 15 11:05:10.830#Z#DEBUG#com.sap.cloud.lm.sl.xs2.41412d7f-f310-11ed-8522-eeee0a9522a0.cap-library-app-srv.startAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-7713###
+[PollStartAppStatusExecution] [cap-library-app-srv] a516dfb2-39ed-474d-b6b9-1dc3d6058009 [2023-05-15T11:05:07.405406] Warning: `cds run` will be removed with the next major version. (STDERR, APP/PROC/WEB)#
+
+#2.0#2023 05 15 11:05:10.830#Z#DEBUG#com.sap.cloud.lm.sl.xs2.41412d7f-f310-11ed-8522-eeee0a9522a0.cap-library-app-srv.startAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-7713###
+[PollStartAppStatusExecution] [cap-library-app-srv] a516dfb2-39ed-474d-b6b9-1dc3d6058009 [2023-05-15T11:05:07.405427] Use `cds-serve` instead in your start script. Set it with: (STDERR, APP/PROC/WEB)#
+
+#2.0#2023 05 15 11:05:10.830#Z#DEBUG#com.sap.cloud.lm.sl.xs2.41412d7f-f310-11ed-8522-eeee0a9522a0.cap-library-app-srv.startAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-7713###
+[PollStartAppStatusExecution] [cap-library-app-srv] a516dfb2-39ed-474d-b6b9-1dc3d6058009 [2023-05-15T11:05:07.405432] npm pkg set scripts.start="cds-serve" (STDERR, APP/PROC/WEB)#
+
+#2.0#2023 05 15 11:05:10.830#Z#DEBUG#com.sap.cloud.lm.sl.xs2.41412d7f-f310-11ed-8522-eeee0a9522a0.cap-library-app-srv.startAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-7713###
+[PollStartAppStatusExecution] [cap-library-app-srv] a516dfb2-39ed-474d-b6b9-1dc3d6058009 [2023-05-15T11:05:07.405436]  (STDERR, APP/PROC/WEB)#
+
+#2.0#2023 05 15 11:05:10.830#Z#DEBUG#com.sap.cloud.lm.sl.xs2.41412d7f-f310-11ed-8522-eeee0a9522a0.cap-library-app-srv.startAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-7713###
+[PollStartAppStatusExecution] [cap-library-app-srv] a516dfb2-39ed-474d-b6b9-1dc3d6058009 [2023-05-15T11:05:07.924653] [cds] - loaded model from 1 file(s): (STDOUT, APP/PROC/WEB)#
+
+#2.0#2023 05 15 11:05:10.830#Z#DEBUG#com.sap.cloud.lm.sl.xs2.41412d7f-f310-11ed-8522-eeee0a9522a0.cap-library-app-srv.startAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-7713###
+[PollStartAppStatusExecution] [cap-library-app-srv] a516dfb2-39ed-474d-b6b9-1dc3d6058009 [2023-05-15T11:05:07.924673] [2m (STDOUT, APP/PROC/WEB)#
+
+#2.0#2023 05 15 11:05:10.830#Z#DEBUG#com.sap.cloud.lm.sl.xs2.41412d7f-f310-11ed-8522-eeee0a9522a0.cap-library-app-srv.startAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-7713###
+[PollStartAppStatusExecution] [cap-library-app-srv] a516dfb2-39ed-474d-b6b9-1dc3d6058009 [2023-05-15T11:05:07.924687] srv/csn.json (STDOUT, APP/PROC/WEB)#
+
+#2.0#2023 05 15 11:05:10.830#Z#DEBUG#com.sap.cloud.lm.sl.xs2.41412d7f-f310-11ed-8522-eeee0a9522a0.cap-library-app-srv.startAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-7713###
+[PollStartAppStatusExecution] [cap-library-app-srv] a516dfb2-39ed-474d-b6b9-1dc3d6058009 [2023-05-15T11:05:07.924747] [0m (STDOUT, APP/PROC/WEB)#
+
+#2.0#2023 05 15 11:05:10.830#Z#DEBUG#com.sap.cloud.lm.sl.xs2.41412d7f-f310-11ed-8522-eeee0a9522a0.cap-library-app-srv.startAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-7713###
+[PollStartAppStatusExecution] [cap-library-app-srv] a516dfb2-39ed-474d-b6b9-1dc3d6058009 [2023-05-15T11:05:08.188423] [cds] - connect to db > hana { (STDOUT, APP/PROC/WEB)#
+
+#2.0#2023 05 15 11:05:10.830#Z#DEBUG#com.sap.cloud.lm.sl.xs2.41412d7f-f310-11ed-8522-eeee0a9522a0.cap-library-app-srv.startAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-7713###
+[PollStartAppStatusExecution] [cap-library-app-srv] a516dfb2-39ed-474d-b6b9-1dc3d6058009 [2023-05-15T11:05:08.188436] database_id: '46b17628-8874-45f2-b018-33655da77bc7', (STDOUT, APP/PROC/WEB)#
+
+#2.0#2023 05 15 11:05:10.830#Z#DEBUG#com.sap.cloud.lm.sl.xs2.41412d7f-f310-11ed-8522-eeee0a9522a0.cap-library-app-srv.startAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-7713###
+[PollStartAppStatusExecution] [cap-library-app-srv] a516dfb2-39ed-474d-b6b9-1dc3d6058009 [2023-05-15T11:05:08.188440] host: '46b17628-8874-45f2-b018-33655da77bc7.hana.trial-us10.hanacloud.ondemand.com', (STDOUT, APP/PROC/WEB)#
+
+#2.0#2023 05 15 11:05:10.830#Z#DEBUG#com.sap.cloud.lm.sl.xs2.41412d7f-f310-11ed-8522-eeee0a9522a0.cap-library-app-srv.startAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-7713###
+[PollStartAppStatusExecution] [cap-library-app-srv] a516dfb2-39ed-474d-b6b9-1dc3d6058009 [2023-05-15T11:05:08.188445] port: '443', (STDOUT, APP/PROC/WEB)#
+
+#2.0#2023 05 15 11:05:10.830#Z#DEBUG#com.sap.cloud.lm.sl.xs2.41412d7f-f310-11ed-8522-eeee0a9522a0.cap-library-app-srv.startAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-7713###
+[PollStartAppStatusExecution] [cap-library-app-srv] a516dfb2-39ed-474d-b6b9-1dc3d6058009 [2023-05-15T11:05:08.188448] driver: 'com.sap.db.jdbc.Driver', (STDOUT, APP/PROC/WEB)#
+
+#2.0#2023 05 15 11:05:10.830#Z#DEBUG#com.sap.cloud.lm.sl.xs2.41412d7f-f310-11ed-8522-eeee0a9522a0.cap-library-app-srv.startAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-7713###
+[PollStartAppStatusExecution] [cap-library-app-srv] a516dfb2-39ed-474d-b6b9-1dc3d6058009 [2023-05-15T11:05:08.188454] url: 'jdbc:sap://46b17628-8874-45f2-b018-33655da77bc7.hana.trial-us10.hanacloud.ondemand.com:443?encrypt=true&validateCertificate=true&currentschema=6793E334BDAB4554B794DBF8CCB78A56', (STDOUT, APP/PROC/WEB)#
+
+#2.0#2023 05 15 11:05:10.830#Z#DEBUG#com.sap.cloud.lm.sl.xs2.41412d7f-f310-11ed-8522-eeee0a9522a0.cap-library-app-srv.startAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-7713###
+[PollStartAppStatusExecution] [cap-library-app-srv] a516dfb2-39ed-474d-b6b9-1dc3d6058009 [2023-05-15T11:05:08.188457] schema: '6793E334BDAB4554B794DBF8CCB78A56', (STDOUT, APP/PROC/WEB)#
+
+#2.0#2023 05 15 11:05:10.830#Z#DEBUG#com.sap.cloud.lm.sl.xs2.41412d7f-f310-11ed-8522-eeee0a9522a0.cap-library-app-srv.startAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-7713###
+[PollStartAppStatusExecution] [cap-library-app-srv] a516dfb2-39ed-474d-b6b9-1dc3d6058009 [2023-05-15T11:05:08.188461] hdi_user: '6793E334BDAB4554B794DBF8CCB78A56_BT0DZIDC3X2M1ZEARCO098FE6_DT', (STDOUT, APP/PROC/WEB)#
+
+#2.0#2023 05 15 11:05:10.830#Z#DEBUG#com.sap.cloud.lm.sl.xs2.41412d7f-f310-11ed-8522-eeee0a9522a0.cap-library-app-srv.startAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-7713###
+[PollStartAppStatusExecution] [cap-library-app-srv] a516dfb2-39ed-474d-b6b9-1dc3d6058009 [2023-05-15T11:05:08.188464] hdi_password: '...', (STDOUT, APP/PROC/WEB)#
+
+#2.0#2023 05 15 11:05:10.830#Z#DEBUG#com.sap.cloud.lm.sl.xs2.41412d7f-f310-11ed-8522-eeee0a9522a0.cap-library-app-srv.startAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-7713###
+[PollStartAppStatusExecution] [cap-library-app-srv] a516dfb2-39ed-474d-b6b9-1dc3d6058009 [2023-05-15T11:05:08.188466] user: '6793E334BDAB4554B794DBF8CCB78A56_BT0DZIDC3X2M1ZEARCO098FE6_RT', (STDOUT, APP/PROC/WEB)#
+
+#2.0#2023 05 15 11:05:10.830#Z#DEBUG#com.sap.cloud.lm.sl.xs2.41412d7f-f310-11ed-8522-eeee0a9522a0.cap-library-app-srv.startAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-7713###
+[PollStartAppStatusExecution] [cap-library-app-srv] a516dfb2-39ed-474d-b6b9-1dc3d6058009 [2023-05-15T11:05:08.188469] password: '...', (STDOUT, APP/PROC/WEB)#
+
+#2.0#2023 05 15 11:05:10.830#Z#DEBUG#com.sap.cloud.lm.sl.xs2.41412d7f-f310-11ed-8522-eeee0a9522a0.cap-library-app-srv.startAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-7713###
+[PollStartAppStatusExecution] [cap-library-app-srv] a516dfb2-39ed-474d-b6b9-1dc3d6058009 [2023-05-15T11:05:08.188471] certificate: '...' (STDOUT, APP/PROC/WEB)#
+
+#2.0#2023 05 15 11:05:10.830#Z#DEBUG#com.sap.cloud.lm.sl.xs2.41412d7f-f310-11ed-8522-eeee0a9522a0.cap-library-app-srv.startAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-7713###
+[PollStartAppStatusExecution] [cap-library-app-srv] a516dfb2-39ed-474d-b6b9-1dc3d6058009 [2023-05-15T11:05:08.188474] } (STDOUT, APP/PROC/WEB)#
+
+#2.0#2023 05 15 11:05:10.830#Z#DEBUG#com.sap.cloud.lm.sl.xs2.41412d7f-f310-11ed-8522-eeee0a9522a0.cap-library-app-srv.startAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-7713###
+[PollStartAppStatusExecution] [cap-library-app-srv] a516dfb2-39ed-474d-b6b9-1dc3d6058009 [2023-05-15T11:05:08.215582] [cds] - (STDERR, APP/PROC/WEB)#
+
+#2.0#2023 05 15 11:05:10.830#Z#DEBUG#com.sap.cloud.lm.sl.xs2.41412d7f-f310-11ed-8522-eeee0a9522a0.cap-library-app-srv.startAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-7713###
+[PollStartAppStatusExecution] [cap-library-app-srv] a516dfb2-39ed-474d-b6b9-1dc3d6058009 [2023-05-15T11:05:08.215606] No XSUAA instance bound to application, but "JWT" configured. (STDERR, APP/PROC/WEB)#
+
+#2.0#2023 05 15 11:05:10.830#Z#DEBUG#com.sap.cloud.lm.sl.xs2.41412d7f-f310-11ed-8522-eeee0a9522a0.cap-library-app-srv.startAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-7713###
+[PollStartAppStatusExecution] [cap-library-app-srv] a516dfb2-39ed-474d-b6b9-1dc3d6058009 [2023-05-15T11:05:08.215610] This is NOT recommended in production! (STDERR, APP/PROC/WEB)#
+
+#2.0#2023 05 15 11:05:10.830#Z#DEBUG#com.sap.cloud.lm.sl.xs2.41412d7f-f310-11ed-8522-eeee0a9522a0.cap-library-app-srv.startAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-7713###
+[PollStartAppStatusExecution] [cap-library-app-srv] a516dfb2-39ed-474d-b6b9-1dc3d6058009 [2023-05-15T11:05:08.215612]  (STDERR, APP/PROC/WEB)#
+
+#2.0#2023 05 15 11:05:10.830#Z#DEBUG#com.sap.cloud.lm.sl.xs2.41412d7f-f310-11ed-8522-eeee0a9522a0.cap-library-app-srv.startAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-7713###
+[PollStartAppStatusExecution] [cap-library-app-srv] a516dfb2-39ed-474d-b6b9-1dc3d6058009 [2023-05-15T11:05:08.437419] [cds] - serving LibraryService { path: '/library' } (STDOUT, APP/PROC/WEB)#
+
+#2.0#2023 05 15 11:05:10.830#Z#DEBUG#com.sap.cloud.lm.sl.xs2.41412d7f-f310-11ed-8522-eeee0a9522a0.cap-library-app-srv.startAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-7713###
+[PollStartAppStatusExecution] [cap-library-app-srv] a516dfb2-39ed-474d-b6b9-1dc3d6058009 [2023-05-15T11:05:08.442605] [cds] - server listening on { url: 'http://localhost:8080' } (STDOUT, APP/PROC/WEB)#
+
+#2.0#2023 05 15 11:05:10.830#Z#DEBUG#com.sap.cloud.lm.sl.xs2.41412d7f-f310-11ed-8522-eeee0a9522a0.cap-library-app-srv.startAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-7713###
+[PollStartAppStatusExecution] [cap-library-app-srv] a516dfb2-39ed-474d-b6b9-1dc3d6058009 [2023-05-15T11:05:08.442856] [cds] - launched at 5/15/2023, 11:05:07 AM, version: 6.8.1, in: 755.298ms (STDOUT, APP/PROC/WEB)#
+
+#2.0#2023 05 15 11:05:10.830#Z#DEBUG#com.sap.cloud.lm.sl.xs2.41412d7f-f310-11ed-8522-eeee0a9522a0.cap-library-app-srv.startAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-7713###
+[PollStartAppStatusExecution] [cap-library-app-srv] a516dfb2-39ed-474d-b6b9-1dc3d6058009 [2023-05-15T11:05:09.495247] Container became healthy (STDOUT, CELL)#
+
