@@ -1,0 +1,3117 @@
+{
+  "namespace": "common",
+  "definitions": {
+    "common.CurrencyType": {
+      "kind": "type",
+      "@Semantics.amount.currencyCode": "CURRENCY_code",
+      "@sap.unit": "CURRENCY_code",
+      "type": "cds.Decimal",
+      "precision": 15,
+      "scale": 2
+    },
+    "masterdata.Statuses": {
+      "kind": "entity",
+      "elements": {
+        "ID": {
+          "key": true,
+          "type": "cds.String"
+        },
+        "name": {
+          "type": "cds.String",
+          "length": 20
+        },
+        "criticality": {
+          "type": "cds.Integer"
+        }
+      }
+    },
+    "masterdata.BookStatuses": {
+      "kind": "entity",
+      "elements": {
+        "ID": {
+          "key": true,
+          "type": "cds.String"
+        },
+        "name": {
+          "type": "cds.String",
+          "length": 20
+        },
+        "criticality": {
+          "type": "cds.Integer"
+        }
+      }
+    },
+    "epam.sap.dev.library.Booking": {
+      "kind": "entity",
+      "@title": "{i18n>bookingTitle}",
+      "includes": [
+        "managed"
+      ],
+      "elements": {
+        "createdAt": {
+          "@cds.on.insert": {
+            "=": "$now"
+          },
+          "@UI.HiddenFilter": true,
+          "@Core.Immutable": true,
+          "@title": "{i18n>CreatedAt}",
+          "@readonly": true,
+          "type": "cds.Timestamp"
+        },
+        "createdBy": {
+          "@cds.on.insert": {
+            "=": "$user"
+          },
+          "@UI.HiddenFilter": true,
+          "@Core.Immutable": true,
+          "@title": "{i18n>CreatedBy}",
+          "@readonly": true,
+          "@description": "{i18n>UserID.Description}",
+          "type": "User",
+          "length": 255
+        },
+        "modifiedAt": {
+          "@cds.on.insert": {
+            "=": "$now"
+          },
+          "@cds.on.update": {
+            "=": "$now"
+          },
+          "@UI.HiddenFilter": true,
+          "@title": "{i18n>ChangedAt}",
+          "@readonly": true,
+          "type": "cds.Timestamp"
+        },
+        "modifiedBy": {
+          "@cds.on.insert": {
+            "=": "$user"
+          },
+          "@cds.on.update": {
+            "=": "$user"
+          },
+          "@UI.HiddenFilter": true,
+          "@title": "{i18n>ChangedBy}",
+          "@readonly": true,
+          "@description": "{i18n>UserID.Description}",
+          "type": "User",
+          "length": 255
+        },
+        "bookingUUID": {
+          "@UI.Hidden": true,
+          "key": true,
+          "type": "cds.UUID"
+        },
+        "bookingID": {
+          "@title": "{i18n>bookingID}",
+          "type": "cds.Integer"
+        },
+        "readerID": {
+          "@title": "{i18n>reader}",
+          "@Common.Text": {
+            "=": "readerID.lastName"
+          },
+          "@Common.TextArrangement": {
+            "#": "TextOnly"
+          },
+          "@Common.ValueList.CollectionPath": "Readers",
+          "@Common.ValueList.Label": "",
+          "@Common.ValueList.Parameters": [
+            {
+              "$Type": "Common.ValueListParameterInOut",
+              "LocalDataProperty": {
+                "=": "readerID_readerUUID"
+              },
+              "ValueListProperty": "readerUUID"
+            },
+            {
+              "$Type": "Common.ValueListParameterDisplayOnly",
+              "ValueListProperty": "readerID"
+            },
+            {
+              "$Type": "Common.ValueListParameterDisplayOnly",
+              "ValueListProperty": "firstName"
+            },
+            {
+              "$Type": "Common.ValueListParameterDisplayOnly",
+              "ValueListProperty": "lastName"
+            },
+            {
+              "$Type": "Common.ValueListParameterDisplayOnly",
+              "ValueListProperty": "readerBithday"
+            },
+            {
+              "$Type": "Common.ValueListParameterDisplayOnly",
+              "ValueListProperty": "phonenumber"
+            }
+          ],
+          "@Common.ValueList.SearchSupported": true,
+          "type": "cds.Association",
+          "target": "epam.sap.dev.library.Readers",
+          "keys": [
+            {
+              "ref": [
+                "readerUUID"
+              ]
+            }
+          ]
+        },
+        "bookID": {
+          "@title": "{i18n>book}",
+          "@Common.Text": {
+            "=": "bookID.bookName"
+          },
+          "@Common.TextArrangement": {
+            "#": "TextOnly"
+          },
+          "@Common.ValueList.CollectionPath": "Books",
+          "@Common.ValueList.Label": "",
+          "@Common.ValueList.Parameters": [
+            {
+              "$Type": "Common.ValueListParameterInOut",
+              "LocalDataProperty": {
+                "=": "bookID_bookUUID"
+              },
+              "ValueListProperty": "bookUUID"
+            },
+            {
+              "$Type": "Common.ValueListParameterDisplayOnly",
+              "ValueListProperty": "bookID"
+            },
+            {
+              "$Type": "Common.ValueListParameterDisplayOnly",
+              "ValueListProperty": "bookName"
+            },
+            {
+              "$Type": "Common.ValueListParameterDisplayOnly",
+              "ValueListProperty": "pageNumber"
+            },
+            {
+              "$Type": "Common.ValueListParameterDisplayOnly",
+              "ValueListProperty": "copyQty"
+            }
+          ],
+          "@Common.ValueList.SearchSupported": true,
+          "type": "cds.Association",
+          "target": "epam.sap.dev.library.Books",
+          "keys": [
+            {
+              "ref": [
+                "bookUUID"
+              ]
+            }
+          ]
+        },
+        "bookingStatus": {
+          "@title": "{i18n>status}",
+          "@Common.Text": {
+            "=": "bookingStatus.name"
+          },
+          "@Common.TextArrangement": {
+            "#": "TextFirst"
+          },
+          "@Common.ValueList.CollectionPath": "Statuses",
+          "@Common.ValueList.Label": "",
+          "@Common.ValueList.Parameters": [
+            {
+              "$Type": "Common.ValueListParameterInOut",
+              "LocalDataProperty": {
+                "=": "bookingStatus_ID"
+              },
+              "ValueListProperty": "ID"
+            },
+            {
+              "$Type": "Common.ValueListParameterDisplayOnly",
+              "ValueListProperty": "name"
+            }
+          ],
+          "@Common.ValueList.SearchSupported": true,
+          "type": "cds.Association",
+          "cardinality": {
+            "max": 1
+          },
+          "target": "masterdata.Statuses",
+          "keys": [
+            {
+              "ref": [
+                "ID"
+              ]
+            }
+          ]
+        },
+        "beginDate": {
+          "@title": "{i18n>beginDate}",
+          "type": "cds.Date"
+        },
+        "beginTime": {
+          "@title": "{i18n>beginTime}",
+          "type": "cds.Time"
+        },
+        "endDate": {
+          "@title": "{i18n>endDate}",
+          "type": "cds.Date"
+        },
+        "endTime": {
+          "@title": "{i18n>endTime}",
+          "type": "cds.Time"
+        },
+        "image": {
+          "@Core.MediaType": "image/png",
+          "type": "cds.LargeBinary"
+        }
+      }
+    },
+    "epam.sap.dev.library.Authors": {
+      "kind": "entity",
+      "@title": "{i18n>authorTitle}",
+      "includes": [
+        "managed"
+      ],
+      "elements": {
+        "createdAt": {
+          "@cds.on.insert": {
+            "=": "$now"
+          },
+          "@UI.HiddenFilter": true,
+          "@Core.Immutable": true,
+          "@title": "{i18n>CreatedAt}",
+          "@readonly": true,
+          "type": "cds.Timestamp"
+        },
+        "createdBy": {
+          "@cds.on.insert": {
+            "=": "$user"
+          },
+          "@UI.HiddenFilter": true,
+          "@Core.Immutable": true,
+          "@title": "{i18n>CreatedBy}",
+          "@readonly": true,
+          "@description": "{i18n>UserID.Description}",
+          "type": "User",
+          "length": 255
+        },
+        "modifiedAt": {
+          "@cds.on.insert": {
+            "=": "$now"
+          },
+          "@cds.on.update": {
+            "=": "$now"
+          },
+          "@UI.HiddenFilter": true,
+          "@title": "{i18n>ChangedAt}",
+          "@readonly": true,
+          "type": "cds.Timestamp"
+        },
+        "modifiedBy": {
+          "@cds.on.insert": {
+            "=": "$user"
+          },
+          "@cds.on.update": {
+            "=": "$user"
+          },
+          "@UI.HiddenFilter": true,
+          "@title": "{i18n>ChangedBy}",
+          "@readonly": true,
+          "@description": "{i18n>UserID.Description}",
+          "type": "User",
+          "length": 255
+        },
+        "authorUUID": {
+          "@UI.Hidden": true,
+          "key": true,
+          "type": "cds.UUID"
+        },
+        "authorID": {
+          "@title": "{i18n>authorID}",
+          "type": "cds.Integer"
+        },
+        "firstName": {
+          "@title": "{i18n>authorFirstName}",
+          "type": "cds.String",
+          "length": 15
+        },
+        "lastName": {
+          "@title": "{i18n>authorLastName}",
+          "type": "cds.String",
+          "length": 15
+        },
+        "birthday": {
+          "@title": "{i18n>birthday}",
+          "type": "cds.Date"
+        },
+        "country": {
+          "@title": "{i18n>country}",
+          "type": "cds.String",
+          "length": 30
+        },
+        "image": {
+          "@Core.MediaType": "image/png",
+          "type": "cds.LargeBinary"
+        },
+        "book": {
+          "type": "cds.Association",
+          "cardinality": {
+            "max": "*"
+          },
+          "target": "epam.sap.dev.library.Books",
+          "on": [
+            {
+              "ref": [
+                "book",
+                "toAuthor"
+              ]
+            },
+            "=",
+            {
+              "ref": [
+                "$self"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "epam.sap.dev.library.Books": {
+      "kind": "entity",
+      "@title": "{i18n>bookTitle}",
+      "includes": [
+        "managed"
+      ],
+      "elements": {
+        "createdAt": {
+          "@cds.on.insert": {
+            "=": "$now"
+          },
+          "@UI.HiddenFilter": true,
+          "@Core.Immutable": true,
+          "@title": "{i18n>CreatedAt}",
+          "@readonly": true,
+          "type": "cds.Timestamp"
+        },
+        "createdBy": {
+          "@cds.on.insert": {
+            "=": "$user"
+          },
+          "@UI.HiddenFilter": true,
+          "@Core.Immutable": true,
+          "@title": "{i18n>CreatedBy}",
+          "@readonly": true,
+          "@description": "{i18n>UserID.Description}",
+          "type": "User",
+          "length": 255
+        },
+        "modifiedAt": {
+          "@cds.on.insert": {
+            "=": "$now"
+          },
+          "@cds.on.update": {
+            "=": "$now"
+          },
+          "@UI.HiddenFilter": true,
+          "@title": "{i18n>ChangedAt}",
+          "@readonly": true,
+          "type": "cds.Timestamp"
+        },
+        "modifiedBy": {
+          "@cds.on.insert": {
+            "=": "$user"
+          },
+          "@cds.on.update": {
+            "=": "$user"
+          },
+          "@UI.HiddenFilter": true,
+          "@title": "{i18n>ChangedBy}",
+          "@readonly": true,
+          "@description": "{i18n>UserID.Description}",
+          "type": "User",
+          "length": 255
+        },
+        "bookUUID": {
+          "@UI.Hidden": true,
+          "key": true,
+          "type": "cds.UUID"
+        },
+        "toAuthor": {
+          "@title": "{i18n>AuthorName}",
+          "@Common.Text": {
+            "=": "toAuthor.lastName"
+          },
+          "@Common.TextArrangement": {
+            "#": "TextOnly"
+          },
+          "@Common.ValueList.CollectionPath": "Authors",
+          "@Common.ValueList.Label": "",
+          "@Common.ValueList.Parameters": [
+            {
+              "$Type": "Common.ValueListParameterInOut",
+              "LocalDataProperty": {
+                "=": "toAuthor_authorUUID"
+              },
+              "ValueListProperty": "authorUUID"
+            },
+            {
+              "$Type": "Common.ValueListParameterDisplayOnly",
+              "ValueListProperty": "authorID"
+            },
+            {
+              "$Type": "Common.ValueListParameterDisplayOnly",
+              "ValueListProperty": "firstName"
+            },
+            {
+              "$Type": "Common.ValueListParameterDisplayOnly",
+              "ValueListProperty": "lastName"
+            },
+            {
+              "$Type": "Common.ValueListParameterDisplayOnly",
+              "ValueListProperty": "birthday"
+            },
+            {
+              "$Type": "Common.ValueListParameterDisplayOnly",
+              "ValueListProperty": "country"
+            }
+          ],
+          "@Common.ValueList.SearchSupported": true,
+          "type": "cds.Association",
+          "target": "epam.sap.dev.library.Authors",
+          "keys": [
+            {
+              "ref": [
+                "authorUUID"
+              ]
+            }
+          ]
+        },
+        "bookID": {
+          "@title": "{i18n>bookID}",
+          "type": "cds.Integer"
+        },
+        "bookName": {
+          "@title": "{i18n>bookName}",
+          "type": "cds.String",
+          "length": 60
+        },
+        "pageNumber": {
+          "@title": "{i18n>pages}",
+          "type": "cds.Integer"
+        },
+        "copyQty": {
+          "@title": "{i18n>copies}",
+          "type": "cds.Integer"
+        },
+        "shippedQty": {
+          "type": "cds.Integer"
+        },
+        "price": {
+          "@title": "{i18n>price}",
+          "@Measures.ISOCurrency": {
+            "=": "CurrencyCode_code"
+          },
+          "type": "cds.Decimal",
+          "precision": 15,
+          "scale": 2
+        },
+        "CurrencyCode": {
+          "@title": "{i18n>currency}",
+          "@Common.Text": {
+            "=": "CurrencyCode.symbol"
+          },
+          "@Common.TextArrangement": {
+            "#": "TextLast"
+          },
+          "@Common.ValueList.CollectionPath": "Currencies",
+          "@Common.ValueList.Label": "",
+          "@Common.ValueList.Parameters": [
+            {
+              "$Type": "Common.ValueListParameterInOut",
+              "LocalDataProperty": {
+                "=": "CurrencyCode_code"
+              },
+              "ValueListProperty": "code"
+            },
+            {
+              "$Type": "Common.ValueListParameterDisplayOnly",
+              "ValueListProperty": "name"
+            },
+            {
+              "$Type": "Common.ValueListParameterDisplayOnly",
+              "ValueListProperty": "descr"
+            },
+            {
+              "$Type": "Common.ValueListParameterDisplayOnly",
+              "ValueListProperty": "symbol"
+            },
+            {
+              "$Type": "Common.ValueListParameterDisplayOnly",
+              "ValueListProperty": "minor"
+            }
+          ],
+          "@Common.ValueList.SearchSupported": true,
+          "@description": "{i18n>CurrencyCode.Description}",
+          "type": "Currency",
+          "target": "sap.common.Currencies",
+          "keys": [
+            {
+              "ref": [
+                "code"
+              ]
+            }
+          ]
+        },
+        "status": {
+          "@title": "{i18n>bookstatus}",
+          "@Common.Text": {
+            "=": "status.name"
+          },
+          "@Common.TextArrangement": {
+            "#": "TextFirst"
+          },
+          "@Common.ValueList.CollectionPath": "BookStatuses",
+          "@Common.ValueList.Label": "",
+          "@Common.ValueList.Parameters": [
+            {
+              "$Type": "Common.ValueListParameterInOut",
+              "LocalDataProperty": {
+                "=": "status_ID"
+              },
+              "ValueListProperty": "ID"
+            },
+            {
+              "$Type": "Common.ValueListParameterDisplayOnly",
+              "ValueListProperty": "name"
+            }
+          ],
+          "@Common.ValueList.SearchSupported": true,
+          "type": "cds.Association",
+          "cardinality": {
+            "max": 1
+          },
+          "target": "masterdata.BookStatuses",
+          "keys": [
+            {
+              "ref": [
+                "ID"
+              ]
+            }
+          ]
+        },
+        "image": {
+          "@Core.MediaType": "image/png",
+          "type": "cds.LargeBinary"
+        }
+      }
+    },
+    "epam.sap.dev.library.Readers": {
+      "kind": "entity",
+      "@title": "{i18n>readerTitle}",
+      "includes": [
+        "managed"
+      ],
+      "elements": {
+        "createdAt": {
+          "@cds.on.insert": {
+            "=": "$now"
+          },
+          "@UI.HiddenFilter": true,
+          "@Core.Immutable": true,
+          "@title": "{i18n>CreatedAt}",
+          "@readonly": true,
+          "type": "cds.Timestamp"
+        },
+        "createdBy": {
+          "@cds.on.insert": {
+            "=": "$user"
+          },
+          "@UI.HiddenFilter": true,
+          "@Core.Immutable": true,
+          "@title": "{i18n>CreatedBy}",
+          "@readonly": true,
+          "@description": "{i18n>UserID.Description}",
+          "type": "User",
+          "length": 255
+        },
+        "modifiedAt": {
+          "@cds.on.insert": {
+            "=": "$now"
+          },
+          "@cds.on.update": {
+            "=": "$now"
+          },
+          "@UI.HiddenFilter": true,
+          "@title": "{i18n>ChangedAt}",
+          "@readonly": true,
+          "type": "cds.Timestamp"
+        },
+        "modifiedBy": {
+          "@cds.on.insert": {
+            "=": "$user"
+          },
+          "@cds.on.update": {
+            "=": "$user"
+          },
+          "@UI.HiddenFilter": true,
+          "@title": "{i18n>ChangedBy}",
+          "@readonly": true,
+          "@description": "{i18n>UserID.Description}",
+          "type": "User",
+          "length": 255
+        },
+        "readerUUID": {
+          "@UI.Hidden": true,
+          "key": true,
+          "type": "cds.UUID"
+        },
+        "readerID": {
+          "@title": "{i18n>readerID}",
+          "type": "cds.Integer"
+        },
+        "firstName": {
+          "@title": "{i18n>firstName}",
+          "type": "cds.String",
+          "length": 15
+        },
+        "lastName": {
+          "@title": "{i18n>lastName}",
+          "type": "cds.String",
+          "length": 15
+        },
+        "readerBithday": {
+          "@title": "{i18n>birthday}",
+          "type": "cds.Date"
+        },
+        "phonenumber": {
+          "@title": "{i18n>phone}",
+          "type": "cds.String",
+          "length": 15
+        },
+        "image": {
+          "@Core.MediaType": "image/png",
+          "type": "cds.LargeBinary"
+        }
+      }
+    },
+    "LibraryService": {
+      "@source": "srv/services.cds",
+      "kind": "service"
+    },
+    "LibraryService.Booking": {
+      "kind": "entity",
+      "@UI.Identification": [
+        {
+          "Value": {
+            "=": "bookingStatus_ID"
+          }
+        }
+      ],
+      "@UI.SelectionFields": [
+        {
+          "=": "bookingStatus_ID"
+        },
+        {
+          "=": "readerID_readerUUID"
+        },
+        {
+          "=": "bookID_bookUUID"
+        },
+        {
+          "=": "beginDate"
+        },
+        {
+          "=": "beginTime"
+        },
+        {
+          "=": "endDate"
+        },
+        {
+          "=": "endTime"
+        }
+      ],
+      "@UI.LineItem": [
+        {
+          "$Type": "UI.DataField",
+          "Value": {
+            "=": "bookingID"
+          },
+          "@UI.Importance": {
+            "#": "High"
+          }
+        },
+        {
+          "$Type": "UI.DataField",
+          "Value": {
+            "=": "bookingStatus_ID"
+          },
+          "Criticality": {
+            "=": "bookingStatus.criticality"
+          },
+          "@UI.Importance": {
+            "#": "High"
+          }
+        },
+        {
+          "$Type": "UI.DataField",
+          "Value": {
+            "=": "readerID.lastName"
+          },
+          "@UI.Importance": {
+            "#": "High"
+          }
+        },
+        {
+          "$Type": "UI.DataField",
+          "Value": {
+            "=": "readerID.firstName"
+          },
+          "@UI.Importance": {
+            "#": "High"
+          }
+        },
+        {
+          "$Type": "UI.DataField",
+          "Value": {
+            "=": "bookID.bookName"
+          },
+          "@UI.Importance": {
+            "#": "High"
+          }
+        },
+        {
+          "$Type": "UI.DataField",
+          "Value": {
+            "=": "beginDate"
+          },
+          "@UI.Importance": {
+            "#": "High"
+          }
+        },
+        {
+          "$Type": "UI.DataField",
+          "Value": {
+            "=": "beginTime"
+          },
+          "@UI.Importance": {
+            "#": "High"
+          }
+        },
+        {
+          "$Type": "UI.DataField",
+          "Value": {
+            "=": "endDate"
+          },
+          "@UI.Importance": {
+            "#": "High"
+          }
+        },
+        {
+          "$Type": "UI.DataField",
+          "Value": {
+            "=": "endTime"
+          },
+          "@UI.Importance": {
+            "#": "High"
+          }
+        }
+      ],
+      "@UI.PresentationVariant.SortOrder": [
+        {
+          "$Type": "Common.SortOrderType",
+          "Property": {
+            "=": "bookingID"
+          },
+          "Descending": false
+        }
+      ],
+      "@UI.HeaderInfo.TypeName": "Booking",
+      "@UI.HeaderInfo.TypeNamePlural": "Bookings",
+      "@UI.HeaderInfo.Title.Value": {
+        "=": "bookingStatus.ID"
+      },
+      "@UI.HeaderInfo.Description.Value": {
+        "=": "bookingStatus.name"
+      },
+      "@UI.HeaderFacets": [
+        {
+          "$Type": "UI.ReferenceFacet",
+          "Target": "@UI.FieldGroup#Description",
+          "@UI.Importance": {
+            "#": "Medium"
+          }
+        }
+      ],
+      "@UI.FieldGroup#Description.Data": [
+        {
+          "$Type": "UI.DataField",
+          "Value": {
+            "=": "image"
+          }
+        },
+        {
+          "$Type": "UI.DataField",
+          "Value": {
+            "=": "beginDate"
+          },
+          "Label": "StartDate"
+        },
+        {
+          "$Type": "UI.DataField",
+          "Value": {
+            "=": "endDate"
+          },
+          "Label": "End Date"
+        }
+      ],
+      "@UI.FieldGroup#Details2.Data": [
+        {
+          "$Type": "UI.DataField",
+          "Value": {
+            "=": "readerID_readerUUID"
+          }
+        }
+      ],
+      "@UI.FieldGroup#Details3.Data": [
+        {
+          "$Type": "UI.DataField",
+          "Value": {
+            "=": "bookID_bookUUID"
+          }
+        }
+      ],
+      "@UI.FieldGroup#Details1.Data": [
+        {
+          "$Type": "UI.DataField",
+          "Value": {
+            "=": "bookingID"
+          }
+        },
+        {
+          "$Type": "UI.DataField",
+          "Value": {
+            "=": "bookingStatus_ID"
+          },
+          "Criticality": {
+            "=": "bookingStatus.criticality"
+          }
+        }
+      ],
+      "@UI.FieldGroup#Details4.Data": [
+        {
+          "$Type": "UI.DataField",
+          "Value": {
+            "=": "beginDate"
+          }
+        },
+        {
+          "$Type": "UI.DataField",
+          "Value": {
+            "=": "beginTime"
+          }
+        },
+        {
+          "$Type": "UI.DataField",
+          "Value": {
+            "=": "endDate"
+          }
+        },
+        {
+          "$Type": "UI.DataField",
+          "Value": {
+            "=": "endTime"
+          }
+        }
+      ],
+      "@UI.FieldGroup#AdministrativeData.Data": [
+        {
+          "$Type": "UI.DataField",
+          "Value": {
+            "=": "createdBy"
+          }
+        },
+        {
+          "$Type": "UI.DataField",
+          "Value": {
+            "=": "createdAt"
+          }
+        },
+        {
+          "$Type": "UI.DataField",
+          "Value": {
+            "=": "modifiedBy"
+          }
+        },
+        {
+          "$Type": "UI.DataField",
+          "Value": {
+            "=": "modifiedAt"
+          }
+        }
+      ],
+      "@UI.Facets": [
+        {
+          "$Type": "UI.CollectionFacet",
+          "ID": "PODetails",
+          "Label": "{i18n>bookinginfo}",
+          "Facets": [
+            {
+              "$Type": "UI.ReferenceFacet",
+              "Label": "{i18n>bookingInfo}",
+              "Target": "@UI.FieldGroup#Details1"
+            },
+            {
+              "$Type": "UI.ReferenceFacet",
+              "Label": "{i18n>reader}",
+              "Target": "@UI.FieldGroup#Details2"
+            },
+            {
+              "$Type": "UI.ReferenceFacet",
+              "Label": "{i18n>book}",
+              "Target": "@UI.FieldGroup#Details3"
+            },
+            {
+              "$Type": "UI.ReferenceFacet",
+              "Label": "{i18n>shedule}",
+              "Target": "@UI.FieldGroup#Details4"
+            }
+          ]
+        },
+        {
+          "$Type": "UI.CollectionFacet",
+          "ID": "POAdmininfo",
+          "Label": "{i18n>adminInfo}",
+          "Facets": [
+            {
+              "$Type": "UI.ReferenceFacet",
+              "Label": "{i18n>adminInfo}",
+              "Target": "@UI.FieldGroup#AdministrativeData"
+            }
+          ]
+        }
+      ],
+      "@odata.draft.enabled": true,
+      "@Capabilities.Deletable": true,
+      "@Capabilities.Insertable": true,
+      "@Capabilities.FilterRestrictions.FilterExpressionRestrictions": [
+        {
+          "Property": "beginDate",
+          "AllowedExpressions": "SingleValue"
+        },
+        {
+          "Property": "endDate",
+          "AllowedExpressions": "SingleValue"
+        },
+        {
+          "Property": "beginTime",
+          "AllowedExpressions": "SingleValue"
+        },
+        {
+          "Property": "endTime",
+          "AllowedExpressions": "SingleValue"
+        }
+      ],
+      "@title": "{i18n>bookingTitle}",
+      "projection": {
+        "from": {
+          "ref": [
+            "epam.sap.dev.library.Booking"
+          ]
+        }
+      },
+      "elements": {
+        "createdAt": {
+          "@cds.on.insert": {
+            "=": "$now"
+          },
+          "@UI.HiddenFilter": true,
+          "@Core.Immutable": true,
+          "@title": "{i18n>CreatedAt}",
+          "@readonly": true,
+          "type": "cds.Timestamp"
+        },
+        "createdBy": {
+          "@cds.on.insert": {
+            "=": "$user"
+          },
+          "@UI.HiddenFilter": true,
+          "@Core.Immutable": true,
+          "@title": "{i18n>CreatedBy}",
+          "@readonly": true,
+          "@description": "{i18n>UserID.Description}",
+          "type": "User",
+          "length": 255
+        },
+        "modifiedAt": {
+          "@cds.on.insert": {
+            "=": "$now"
+          },
+          "@cds.on.update": {
+            "=": "$now"
+          },
+          "@UI.HiddenFilter": true,
+          "@title": "{i18n>ChangedAt}",
+          "@readonly": true,
+          "type": "cds.Timestamp"
+        },
+        "modifiedBy": {
+          "@cds.on.insert": {
+            "=": "$user"
+          },
+          "@cds.on.update": {
+            "=": "$user"
+          },
+          "@UI.HiddenFilter": true,
+          "@title": "{i18n>ChangedBy}",
+          "@readonly": true,
+          "@description": "{i18n>UserID.Description}",
+          "type": "User",
+          "length": 255
+        },
+        "bookingUUID": {
+          "@UI.Hidden": true,
+          "key": true,
+          "type": "cds.UUID"
+        },
+        "bookingID": {
+          "@readonly": true,
+          "@title": "{i18n>bookingID}",
+          "type": "cds.Integer"
+        },
+        "readerID": {
+          "@mandatory": true,
+          "@title": "{i18n>reader}",
+          "@Common.Text": {
+            "=": "readerID.lastName"
+          },
+          "@Common.TextArrangement": {
+            "#": "TextOnly"
+          },
+          "@Common.ValueList.CollectionPath": "Readers",
+          "@Common.ValueList.Label": "",
+          "@Common.ValueList.Parameters": [
+            {
+              "$Type": "Common.ValueListParameterInOut",
+              "LocalDataProperty": {
+                "=": "readerID_readerUUID"
+              },
+              "ValueListProperty": "readerUUID"
+            },
+            {
+              "$Type": "Common.ValueListParameterDisplayOnly",
+              "ValueListProperty": "readerID"
+            },
+            {
+              "$Type": "Common.ValueListParameterDisplayOnly",
+              "ValueListProperty": "firstName"
+            },
+            {
+              "$Type": "Common.ValueListParameterDisplayOnly",
+              "ValueListProperty": "lastName"
+            },
+            {
+              "$Type": "Common.ValueListParameterDisplayOnly",
+              "ValueListProperty": "readerBithday"
+            },
+            {
+              "$Type": "Common.ValueListParameterDisplayOnly",
+              "ValueListProperty": "phonenumber"
+            }
+          ],
+          "@Common.ValueList.SearchSupported": true,
+          "type": "cds.Association",
+          "target": "LibraryService.Readers",
+          "keys": [
+            {
+              "ref": [
+                "readerUUID"
+              ]
+            }
+          ]
+        },
+        "bookID": {
+          "@mandatory": true,
+          "@title": "{i18n>book}",
+          "@Common.Text": {
+            "=": "bookID.bookName"
+          },
+          "@Common.TextArrangement": {
+            "#": "TextOnly"
+          },
+          "@Common.ValueList.CollectionPath": "Books",
+          "@Common.ValueList.Label": "",
+          "@Common.ValueList.Parameters": [
+            {
+              "$Type": "Common.ValueListParameterInOut",
+              "LocalDataProperty": {
+                "=": "bookID_bookUUID"
+              },
+              "ValueListProperty": "bookUUID"
+            },
+            {
+              "$Type": "Common.ValueListParameterDisplayOnly",
+              "ValueListProperty": "bookID"
+            },
+            {
+              "$Type": "Common.ValueListParameterDisplayOnly",
+              "ValueListProperty": "bookName"
+            },
+            {
+              "$Type": "Common.ValueListParameterDisplayOnly",
+              "ValueListProperty": "pageNumber"
+            },
+            {
+              "$Type": "Common.ValueListParameterDisplayOnly",
+              "ValueListProperty": "copyQty"
+            }
+          ],
+          "@Common.ValueList.SearchSupported": true,
+          "type": "cds.Association",
+          "target": "LibraryService.Books",
+          "keys": [
+            {
+              "ref": [
+                "bookUUID"
+              ]
+            }
+          ]
+        },
+        "bookingStatus": {
+          "@readonly": true,
+          "@title": "{i18n>status}",
+          "@Common.Text": {
+            "=": "bookingStatus.name"
+          },
+          "@Common.TextArrangement": {
+            "#": "TextFirst"
+          },
+          "@Common.ValueList.CollectionPath": "Statuses",
+          "@Common.ValueList.Label": "",
+          "@Common.ValueList.Parameters": [
+            {
+              "$Type": "Common.ValueListParameterInOut",
+              "LocalDataProperty": {
+                "=": "bookingStatus_ID"
+              },
+              "ValueListProperty": "ID"
+            },
+            {
+              "$Type": "Common.ValueListParameterDisplayOnly",
+              "ValueListProperty": "name"
+            }
+          ],
+          "@Common.ValueList.SearchSupported": true,
+          "type": "cds.Association",
+          "cardinality": {
+            "max": 1
+          },
+          "target": "LibraryService.Statuses",
+          "keys": [
+            {
+              "ref": [
+                "ID"
+              ]
+            }
+          ]
+        },
+        "beginDate": {
+          "@readonly": true,
+          "@title": "{i18n>beginDate}",
+          "type": "cds.Date"
+        },
+        "beginTime": {
+          "@readonly": true,
+          "@title": "{i18n>beginTime}",
+          "type": "cds.Time"
+        },
+        "endDate": {
+          "@readonly": true,
+          "@title": "{i18n>endDate}",
+          "type": "cds.Date"
+        },
+        "endTime": {
+          "@readonly": true,
+          "@title": "{i18n>endTime}",
+          "type": "cds.Time"
+        },
+        "image": {
+          "@Core.MediaType": "image/png",
+          "type": "cds.LargeBinary"
+        }
+      }
+    },
+    "LibraryService.Books": {
+      "kind": "entity",
+      "@UI.SelectionFields": [
+        {
+          "=": "toAuthor_authorUUID"
+        }
+      ],
+      "@UI.Identification": [
+        {
+          "Value": {
+            "=": "bookUUID"
+          }
+        }
+      ],
+      "@UI.LineItem": [
+        {
+          "$Type": "UI.DataField",
+          "Value": {
+            "=": "bookID"
+          },
+          "@UI.Importance": {
+            "#": "High"
+          }
+        },
+        {
+          "$Type": "UI.DataField",
+          "Value": {
+            "=": "status_ID"
+          },
+          "Criticality": {
+            "=": "status.criticality"
+          },
+          "@UI.Importance": {
+            "#": "High"
+          }
+        },
+        {
+          "$Type": "UI.DataField",
+          "Value": {
+            "=": "bookName"
+          },
+          "@UI.Importance": {
+            "#": "High"
+          }
+        },
+        {
+          "$Type": "UI.DataField",
+          "Value": {
+            "=": "toAuthor.firstName"
+          },
+          "@UI.Importance": {
+            "#": "High"
+          }
+        },
+        {
+          "$Type": "UI.DataField",
+          "Value": {
+            "=": "toAuthor.lastName"
+          },
+          "@UI.Importance": {
+            "#": "High"
+          }
+        },
+        {
+          "$Type": "UI.DataField",
+          "Value": {
+            "=": "pageNumber"
+          },
+          "@UI.Importance": {
+            "#": "High"
+          }
+        },
+        {
+          "$Type": "UI.DataField",
+          "Value": {
+            "=": "copyQty"
+          },
+          "@UI.Importance": {
+            "#": "High"
+          }
+        },
+        {
+          "$Type": "UI.DataField",
+          "Value": {
+            "=": "price"
+          },
+          "@UI.Importance": {
+            "#": "High"
+          }
+        }
+      ],
+      "@UI.PresentationVariant.SortOrder": [
+        {
+          "$Type": "Common.SortOrderType",
+          "Property": {
+            "=": "bookID"
+          },
+          "Descending": false
+        }
+      ],
+      "@UI.HeaderInfo.TypeName": "Book",
+      "@UI.HeaderInfo.TypeNamePlural": "Books",
+      "@UI.HeaderInfo.Title.Value": {
+        "=": "bookName"
+      },
+      "@UI.HeaderInfo.Description.Value": {
+        "=": "toAuthor.lastName"
+      },
+      "@UI.HeaderFacets": [
+        {
+          "$Type": "UI.ReferenceFacet",
+          "Target": "@UI.FieldGroup#Description",
+          "@UI.Importance": {
+            "#": "High"
+          }
+        }
+      ],
+      "@UI.FieldGroup#Description.Data": [
+        {
+          "$Type": "UI.DataField",
+          "Value": {
+            "=": "image"
+          }
+        },
+        {
+          "$Type": "UI.DataField",
+          "Value": {
+            "=": "copyQty"
+          }
+        },
+        {
+          "$Type": "UI.DataField",
+          "Value": {
+            "=": "pageNumber"
+          }
+        }
+      ],
+      "@UI.FieldGroup#Details.Data": [
+        {
+          "$Type": "UI.DataField",
+          "Value": {
+            "=": "bookID"
+          }
+        },
+        {
+          "$Type": "UI.DataField",
+          "Value": {
+            "=": "status_ID"
+          },
+          "Criticality": {
+            "=": "status.criticality"
+          }
+        },
+        {
+          "$Type": "UI.DataField",
+          "Value": {
+            "=": "bookName"
+          }
+        },
+        {
+          "$Type": "UI.DataField",
+          "Value": {
+            "=": "toAuthor_authorUUID"
+          }
+        },
+        {
+          "$Type": "UI.DataField",
+          "Value": {
+            "=": "pageNumber"
+          }
+        },
+        {
+          "$Type": "UI.DataField",
+          "Value": {
+            "=": "copyQty"
+          }
+        },
+        {
+          "$Type": "UI.DataField",
+          "Value": {
+            "=": "price"
+          }
+        }
+      ],
+      "@UI.FieldGroup#AdministrativeData.Data": [
+        {
+          "$Type": "UI.DataField",
+          "Value": {
+            "=": "createdBy"
+          }
+        },
+        {
+          "$Type": "UI.DataField",
+          "Value": {
+            "=": "createdAt"
+          }
+        },
+        {
+          "$Type": "UI.DataField",
+          "Value": {
+            "=": "modifiedBy"
+          }
+        },
+        {
+          "$Type": "UI.DataField",
+          "Value": {
+            "=": "modifiedAt"
+          }
+        }
+      ],
+      "@UI.Facets": [
+        {
+          "$Type": "UI.CollectionFacet",
+          "ID": "PODetails",
+          "Label": "{i18n>readerInfo}",
+          "Facets": [
+            {
+              "$Type": "UI.ReferenceFacet",
+              "Label": "{i18n>readerinfo}",
+              "Target": "@UI.FieldGroup#Details"
+            }
+          ]
+        },
+        {
+          "$Type": "UI.CollectionFacet",
+          "ID": "POAdmininfo",
+          "Label": "{i18n>adminInfo}",
+          "Facets": [
+            {
+              "$Type": "UI.ReferenceFacet",
+              "Label": "{i18n>admininfo}",
+              "Target": "@UI.FieldGroup#AdministrativeData"
+            }
+          ]
+        }
+      ],
+      "@odata.draft.enabled": true,
+      "@Capabilities.Deletable": true,
+      "@Capabilities.Insertable": true,
+      "@title": "{i18n>bookTitle}",
+      "projection": {
+        "from": {
+          "ref": [
+            "epam.sap.dev.library.Books"
+          ]
+        }
+      },
+      "elements": {
+        "createdAt": {
+          "@cds.on.insert": {
+            "=": "$now"
+          },
+          "@UI.HiddenFilter": true,
+          "@Core.Immutable": true,
+          "@title": "{i18n>CreatedAt}",
+          "@readonly": true,
+          "type": "cds.Timestamp"
+        },
+        "createdBy": {
+          "@cds.on.insert": {
+            "=": "$user"
+          },
+          "@UI.HiddenFilter": true,
+          "@Core.Immutable": true,
+          "@title": "{i18n>CreatedBy}",
+          "@readonly": true,
+          "@description": "{i18n>UserID.Description}",
+          "type": "User",
+          "length": 255
+        },
+        "modifiedAt": {
+          "@cds.on.insert": {
+            "=": "$now"
+          },
+          "@cds.on.update": {
+            "=": "$now"
+          },
+          "@UI.HiddenFilter": true,
+          "@title": "{i18n>ChangedAt}",
+          "@readonly": true,
+          "type": "cds.Timestamp"
+        },
+        "modifiedBy": {
+          "@cds.on.insert": {
+            "=": "$user"
+          },
+          "@cds.on.update": {
+            "=": "$user"
+          },
+          "@UI.HiddenFilter": true,
+          "@title": "{i18n>ChangedBy}",
+          "@readonly": true,
+          "@description": "{i18n>UserID.Description}",
+          "type": "User",
+          "length": 255
+        },
+        "bookUUID": {
+          "@UI.Hidden": true,
+          "key": true,
+          "type": "cds.UUID"
+        },
+        "toAuthor": {
+          "@mandatory": true,
+          "@title": "{i18n>AuthorName}",
+          "@Common.Text": {
+            "=": "toAuthor.lastName"
+          },
+          "@Common.TextArrangement": {
+            "#": "TextOnly"
+          },
+          "@Common.ValueList.CollectionPath": "Authors",
+          "@Common.ValueList.Label": "",
+          "@Common.ValueList.Parameters": [
+            {
+              "$Type": "Common.ValueListParameterInOut",
+              "LocalDataProperty": {
+                "=": "toAuthor_authorUUID"
+              },
+              "ValueListProperty": "authorUUID"
+            },
+            {
+              "$Type": "Common.ValueListParameterDisplayOnly",
+              "ValueListProperty": "authorID"
+            },
+            {
+              "$Type": "Common.ValueListParameterDisplayOnly",
+              "ValueListProperty": "firstName"
+            },
+            {
+              "$Type": "Common.ValueListParameterDisplayOnly",
+              "ValueListProperty": "lastName"
+            },
+            {
+              "$Type": "Common.ValueListParameterDisplayOnly",
+              "ValueListProperty": "birthday"
+            },
+            {
+              "$Type": "Common.ValueListParameterDisplayOnly",
+              "ValueListProperty": "country"
+            }
+          ],
+          "@Common.ValueList.SearchSupported": true,
+          "type": "cds.Association",
+          "target": "LibraryService.Authors",
+          "keys": [
+            {
+              "ref": [
+                "authorUUID"
+              ]
+            }
+          ]
+        },
+        "bookID": {
+          "@readonly": true,
+          "@title": "{i18n>bookID}",
+          "type": "cds.Integer"
+        },
+        "bookName": {
+          "@mandatory": true,
+          "@title": "{i18n>bookName}",
+          "type": "cds.String",
+          "length": 60
+        },
+        "pageNumber": {
+          "@title": "{i18n>pages}",
+          "type": "cds.Integer"
+        },
+        "copyQty": {
+          "@mandatory": true,
+          "@title": "{i18n>copies}",
+          "type": "cds.Integer"
+        },
+        "shippedQty": {
+          "type": "cds.Integer"
+        },
+        "price": {
+          "@mandatory": true,
+          "@title": "{i18n>price}",
+          "@Measures.ISOCurrency": {
+            "=": "CurrencyCode_code"
+          },
+          "type": "cds.Decimal",
+          "precision": 15,
+          "scale": 2
+        },
+        "CurrencyCode": {
+          "@mandatory": true,
+          "@title": "{i18n>currency}",
+          "@Common.Text": {
+            "=": "CurrencyCode.symbol"
+          },
+          "@Common.TextArrangement": {
+            "#": "TextLast"
+          },
+          "@Common.ValueList.CollectionPath": "Currencies",
+          "@Common.ValueList.Label": "",
+          "@Common.ValueList.Parameters": [
+            {
+              "$Type": "Common.ValueListParameterInOut",
+              "LocalDataProperty": {
+                "=": "CurrencyCode_code"
+              },
+              "ValueListProperty": "code"
+            },
+            {
+              "$Type": "Common.ValueListParameterDisplayOnly",
+              "ValueListProperty": "name"
+            },
+            {
+              "$Type": "Common.ValueListParameterDisplayOnly",
+              "ValueListProperty": "descr"
+            },
+            {
+              "$Type": "Common.ValueListParameterDisplayOnly",
+              "ValueListProperty": "symbol"
+            },
+            {
+              "$Type": "Common.ValueListParameterDisplayOnly",
+              "ValueListProperty": "minor"
+            }
+          ],
+          "@Common.ValueList.SearchSupported": true,
+          "@description": "{i18n>CurrencyCode.Description}",
+          "type": "Currency",
+          "target": "LibraryService.Currencies",
+          "keys": [
+            {
+              "ref": [
+                "code"
+              ]
+            }
+          ]
+        },
+        "status": {
+          "@readonly": true,
+          "@title": "{i18n>bookstatus}",
+          "@Common.Text": {
+            "=": "status.name"
+          },
+          "@Common.TextArrangement": {
+            "#": "TextFirst"
+          },
+          "@Common.ValueList.CollectionPath": "BookStatuses",
+          "@Common.ValueList.Label": "",
+          "@Common.ValueList.Parameters": [
+            {
+              "$Type": "Common.ValueListParameterInOut",
+              "LocalDataProperty": {
+                "=": "status_ID"
+              },
+              "ValueListProperty": "ID"
+            },
+            {
+              "$Type": "Common.ValueListParameterDisplayOnly",
+              "ValueListProperty": "name"
+            }
+          ],
+          "@Common.ValueList.SearchSupported": true,
+          "type": "cds.Association",
+          "cardinality": {
+            "max": 1
+          },
+          "target": "LibraryService.BookStatuses",
+          "keys": [
+            {
+              "ref": [
+                "ID"
+              ]
+            }
+          ]
+        },
+        "image": {
+          "@Core.MediaType": "image/png",
+          "type": "cds.LargeBinary"
+        }
+      }
+    },
+    "LibraryService.Readers": {
+      "kind": "entity",
+      "@UI.SelectionFields": [
+        {
+          "=": "readerBithday"
+        }
+      ],
+      "@UI.LineItem": [
+        {
+          "$Type": "UI.DataField",
+          "Value": {
+            "=": "readerID"
+          },
+          "@UI.Importance": {
+            "#": "High"
+          }
+        },
+        {
+          "$Type": "UI.DataField",
+          "Value": {
+            "=": "firstName"
+          },
+          "@UI.Importance": {
+            "#": "High"
+          }
+        },
+        {
+          "$Type": "UI.DataField",
+          "Value": {
+            "=": "lastName"
+          },
+          "@UI.Importance": {
+            "#": "High"
+          }
+        },
+        {
+          "$Type": "UI.DataField",
+          "Value": {
+            "=": "readerBithday"
+          },
+          "@UI.Importance": {
+            "#": "High"
+          }
+        },
+        {
+          "$Type": "UI.DataField",
+          "Value": {
+            "=": "phonenumber"
+          },
+          "@UI.Importance": {
+            "#": "High"
+          }
+        }
+      ],
+      "@UI.PresentationVariant.SortOrder": [
+        {
+          "$Type": "Common.SortOrderType",
+          "Property": {
+            "=": "readerID"
+          },
+          "Descending": false
+        }
+      ],
+      "@UI.HeaderInfo.TypeName": "Reader",
+      "@UI.HeaderInfo.TypeNamePlural": "Readers",
+      "@UI.HeaderInfo.Title.Value": {
+        "=": "firstName"
+      },
+      "@UI.HeaderInfo.Description.Value": {
+        "=": "lastName"
+      },
+      "@UI.HeaderFacets": [
+        {
+          "$Type": "UI.ReferenceFacet",
+          "Target": "@UI.FieldGroup#Description",
+          "@UI.Importance": {
+            "#": "High"
+          }
+        }
+      ],
+      "@UI.FieldGroup#Description.Data": [
+        {
+          "$Type": "UI.DataField",
+          "Value": {
+            "=": "image"
+          }
+        },
+        {
+          "$Type": "UI.DataField",
+          "Value": {
+            "=": "readerBithday"
+          }
+        },
+        {
+          "$Type": "UI.DataField",
+          "Value": {
+            "=": "phonenumber"
+          }
+        }
+      ],
+      "@UI.FieldGroup#Details.Data": [
+        {
+          "$Type": "UI.DataField",
+          "Value": {
+            "=": "readerID"
+          }
+        },
+        {
+          "$Type": "UI.DataField",
+          "Value": {
+            "=": "firstName"
+          }
+        },
+        {
+          "$Type": "UI.DataField",
+          "Value": {
+            "=": "lastName"
+          }
+        },
+        {
+          "$Type": "UI.DataField",
+          "Value": {
+            "=": "readerBithday"
+          }
+        },
+        {
+          "$Type": "UI.DataField",
+          "Value": {
+            "=": "phonenumber"
+          }
+        }
+      ],
+      "@UI.FieldGroup#AdministrativeData.Data": [
+        {
+          "$Type": "UI.DataField",
+          "Value": {
+            "=": "createdBy"
+          }
+        },
+        {
+          "$Type": "UI.DataField",
+          "Value": {
+            "=": "createdAt"
+          }
+        },
+        {
+          "$Type": "UI.DataField",
+          "Value": {
+            "=": "modifiedBy"
+          }
+        },
+        {
+          "$Type": "UI.DataField",
+          "Value": {
+            "=": "modifiedAt"
+          }
+        }
+      ],
+      "@UI.Facets": [
+        {
+          "$Type": "UI.CollectionFacet",
+          "ID": "PODetails",
+          "Label": "{i18n>readerInfo}",
+          "Facets": [
+            {
+              "$Type": "UI.ReferenceFacet",
+              "Label": "{i18n>readerinfo}",
+              "Target": "@UI.FieldGroup#Details"
+            }
+          ]
+        },
+        {
+          "$Type": "UI.CollectionFacet",
+          "ID": "POAdmininfo",
+          "Label": "{i18n>adminInfo}",
+          "Facets": [
+            {
+              "$Type": "UI.ReferenceFacet",
+              "Label": "{i18n>admininfo}",
+              "Target": "@UI.FieldGroup#AdministrativeData"
+            }
+          ]
+        }
+      ],
+      "@odata.draft.enabled": true,
+      "@Capabilities.Deletable": true,
+      "@Capabilities.Insertable": true,
+      "@Capabilities.FilterRestrictions.FilterExpressionRestrictions": [
+        {
+          "Property": "readerBithday",
+          "AllowedExpressions": "SingleValue"
+        }
+      ],
+      "@title": "{i18n>readerTitle}",
+      "projection": {
+        "from": {
+          "ref": [
+            "epam.sap.dev.library.Readers"
+          ]
+        }
+      },
+      "elements": {
+        "createdAt": {
+          "@cds.on.insert": {
+            "=": "$now"
+          },
+          "@UI.HiddenFilter": true,
+          "@Core.Immutable": true,
+          "@title": "{i18n>CreatedAt}",
+          "@readonly": true,
+          "type": "cds.Timestamp"
+        },
+        "createdBy": {
+          "@cds.on.insert": {
+            "=": "$user"
+          },
+          "@UI.HiddenFilter": true,
+          "@Core.Immutable": true,
+          "@title": "{i18n>CreatedBy}",
+          "@readonly": true,
+          "@description": "{i18n>UserID.Description}",
+          "type": "User",
+          "length": 255
+        },
+        "modifiedAt": {
+          "@cds.on.insert": {
+            "=": "$now"
+          },
+          "@cds.on.update": {
+            "=": "$now"
+          },
+          "@UI.HiddenFilter": true,
+          "@title": "{i18n>ChangedAt}",
+          "@readonly": true,
+          "type": "cds.Timestamp"
+        },
+        "modifiedBy": {
+          "@cds.on.insert": {
+            "=": "$user"
+          },
+          "@cds.on.update": {
+            "=": "$user"
+          },
+          "@UI.HiddenFilter": true,
+          "@title": "{i18n>ChangedBy}",
+          "@readonly": true,
+          "@description": "{i18n>UserID.Description}",
+          "type": "User",
+          "length": 255
+        },
+        "readerUUID": {
+          "@UI.Hidden": true,
+          "key": true,
+          "type": "cds.UUID"
+        },
+        "readerID": {
+          "@readonly": true,
+          "@title": "{i18n>readerID}",
+          "type": "cds.Integer"
+        },
+        "firstName": {
+          "@mandatory": true,
+          "@title": "{i18n>firstName}",
+          "type": "cds.String",
+          "length": 15
+        },
+        "lastName": {
+          "@mandatory": true,
+          "@title": "{i18n>lastName}",
+          "type": "cds.String",
+          "length": 15
+        },
+        "readerBithday": {
+          "@title": "{i18n>birthday}",
+          "type": "cds.Date"
+        },
+        "phonenumber": {
+          "@title": "{i18n>phone}",
+          "type": "cds.String",
+          "length": 15
+        },
+        "image": {
+          "@Core.MediaType": "image/png",
+          "type": "cds.LargeBinary"
+        }
+      }
+    },
+    "LibraryService.Authors": {
+      "kind": "entity",
+      "@UI.SelectionFields": [
+        {
+          "=": "birthday"
+        }
+      ],
+      "@UI.LineItem": [
+        {
+          "$Type": "UI.DataField",
+          "Value": {
+            "=": "authorID"
+          },
+          "@UI.Importance": {
+            "#": "High"
+          }
+        },
+        {
+          "$Type": "UI.DataField",
+          "Value": {
+            "=": "firstName"
+          },
+          "@UI.Importance": {
+            "#": "High"
+          }
+        },
+        {
+          "$Type": "UI.DataField",
+          "Value": {
+            "=": "lastName"
+          },
+          "@UI.Importance": {
+            "#": "High"
+          }
+        },
+        {
+          "$Type": "UI.DataField",
+          "Value": {
+            "=": "birthday"
+          },
+          "@UI.Importance": {
+            "#": "High"
+          }
+        },
+        {
+          "$Type": "UI.DataField",
+          "Value": {
+            "=": "country"
+          },
+          "@UI.Importance": {
+            "#": "High"
+          }
+        }
+      ],
+      "@UI.PresentationVariant.SortOrder": [
+        {
+          "$Type": "Common.SortOrderType",
+          "Property": {
+            "=": "authorID"
+          },
+          "Descending": false
+        }
+      ],
+      "@UI.HeaderInfo.TypeName": "Author",
+      "@UI.HeaderInfo.TypeNamePlural": "Authors",
+      "@UI.HeaderInfo.Title.Value": {
+        "=": "firstName"
+      },
+      "@UI.HeaderInfo.Description.Value": {
+        "=": "lastName"
+      },
+      "@UI.HeaderFacets": [
+        {
+          "$Type": "UI.ReferenceFacet",
+          "Target": "@UI.FieldGroup#Description",
+          "@UI.Importance": {
+            "#": "High"
+          }
+        }
+      ],
+      "@UI.FieldGroup#Description.Data": [
+        {
+          "$Type": "UI.DataField",
+          "Value": {
+            "=": "image"
+          }
+        },
+        {
+          "$Type": "UI.DataField",
+          "Value": {
+            "=": "birthday"
+          }
+        },
+        {
+          "$Type": "UI.DataField",
+          "Value": {
+            "=": "country"
+          }
+        }
+      ],
+      "@UI.FieldGroup#Details.Data": [
+        {
+          "$Type": "UI.DataField",
+          "Value": {
+            "=": "authorID"
+          }
+        },
+        {
+          "$Type": "UI.DataField",
+          "Value": {
+            "=": "firstName"
+          }
+        },
+        {
+          "$Type": "UI.DataField",
+          "Value": {
+            "=": "lastName"
+          }
+        },
+        {
+          "$Type": "UI.DataField",
+          "Value": {
+            "=": "birthday"
+          }
+        },
+        {
+          "$Type": "UI.DataField",
+          "Value": {
+            "=": "country"
+          }
+        }
+      ],
+      "@UI.FieldGroup#AdministrativeData.Data": [
+        {
+          "$Type": "UI.DataField",
+          "Value": {
+            "=": "createdBy"
+          }
+        },
+        {
+          "$Type": "UI.DataField",
+          "Value": {
+            "=": "createdAt"
+          }
+        },
+        {
+          "$Type": "UI.DataField",
+          "Value": {
+            "=": "modifiedBy"
+          }
+        },
+        {
+          "$Type": "UI.DataField",
+          "Value": {
+            "=": "modifiedAt"
+          }
+        }
+      ],
+      "@UI.Facets": [
+        {
+          "$Type": "UI.CollectionFacet",
+          "ID": "PODetails",
+          "Label": "{i18n>readerInfo}",
+          "Facets": [
+            {
+              "$Type": "UI.ReferenceFacet",
+              "Label": "{i18n>readerinfo}",
+              "Target": "@UI.FieldGroup#Details"
+            }
+          ]
+        },
+        {
+          "$Type": "UI.CollectionFacet",
+          "ID": "POAdmininfo",
+          "Label": "{i18n>adminInfo}",
+          "Facets": [
+            {
+              "$Type": "UI.ReferenceFacet",
+              "Label": "{i18n>admininfo}",
+              "Target": "@UI.FieldGroup#AdministrativeData"
+            }
+          ]
+        },
+        {
+          "$Type": "UI.ReferenceFacet",
+          "Label": "{i18n>bookInfo}",
+          "Target": "book/@UI.LineItem"
+        }
+      ],
+      "@odata.draft.enabled": true,
+      "@Capabilities.Deletable": true,
+      "@Capabilities.Insertable": true,
+      "@Capabilities.FilterRestrictions.FilterExpressionRestrictions": [
+        {
+          "Property": "birthday",
+          "AllowedExpressions": "SingleValue"
+        }
+      ],
+      "@title": "{i18n>authorTitle}",
+      "projection": {
+        "from": {
+          "ref": [
+            "epam.sap.dev.library.Authors"
+          ]
+        }
+      },
+      "elements": {
+        "createdAt": {
+          "@cds.on.insert": {
+            "=": "$now"
+          },
+          "@UI.HiddenFilter": true,
+          "@Core.Immutable": true,
+          "@title": "{i18n>CreatedAt}",
+          "@readonly": true,
+          "type": "cds.Timestamp"
+        },
+        "createdBy": {
+          "@cds.on.insert": {
+            "=": "$user"
+          },
+          "@UI.HiddenFilter": true,
+          "@Core.Immutable": true,
+          "@title": "{i18n>CreatedBy}",
+          "@readonly": true,
+          "@description": "{i18n>UserID.Description}",
+          "type": "User",
+          "length": 255
+        },
+        "modifiedAt": {
+          "@cds.on.insert": {
+            "=": "$now"
+          },
+          "@cds.on.update": {
+            "=": "$now"
+          },
+          "@UI.HiddenFilter": true,
+          "@title": "{i18n>ChangedAt}",
+          "@readonly": true,
+          "type": "cds.Timestamp"
+        },
+        "modifiedBy": {
+          "@cds.on.insert": {
+            "=": "$user"
+          },
+          "@cds.on.update": {
+            "=": "$user"
+          },
+          "@UI.HiddenFilter": true,
+          "@title": "{i18n>ChangedBy}",
+          "@readonly": true,
+          "@description": "{i18n>UserID.Description}",
+          "type": "User",
+          "length": 255
+        },
+        "authorUUID": {
+          "@UI.Hidden": true,
+          "key": true,
+          "type": "cds.UUID"
+        },
+        "authorID": {
+          "@readonly": true,
+          "@title": "{i18n>authorID}",
+          "type": "cds.Integer"
+        },
+        "firstName": {
+          "@mandatory": true,
+          "@title": "{i18n>authorFirstName}",
+          "type": "cds.String",
+          "length": 15
+        },
+        "lastName": {
+          "@mandatory": true,
+          "@title": "{i18n>authorLastName}",
+          "type": "cds.String",
+          "length": 15
+        },
+        "birthday": {
+          "@title": "{i18n>birthday}",
+          "type": "cds.Date"
+        },
+        "country": {
+          "@title": "{i18n>country}",
+          "type": "cds.String",
+          "length": 30
+        },
+        "image": {
+          "@Core.MediaType": "image/png",
+          "type": "cds.LargeBinary"
+        },
+        "book": {
+          "type": "cds.Association",
+          "cardinality": {
+            "max": "*"
+          },
+          "target": "LibraryService.Books",
+          "on": [
+            {
+              "ref": [
+                "book",
+                "toAuthor"
+              ]
+            },
+            "=",
+            {
+              "ref": [
+                "$self"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "LibraryService.Statuses": {
+      "kind": "entity",
+      "projection": {
+        "from": {
+          "ref": [
+            "masterdata.Statuses"
+          ]
+        }
+      },
+      "elements": {
+        "ID": {
+          "key": true,
+          "type": "cds.String"
+        },
+        "name": {
+          "type": "cds.String",
+          "length": 20
+        },
+        "criticality": {
+          "type": "cds.Integer"
+        }
+      }
+    },
+    "LibraryService.BookStatuses": {
+      "kind": "entity",
+      "projection": {
+        "from": {
+          "ref": [
+            "masterdata.BookStatuses"
+          ]
+        }
+      },
+      "elements": {
+        "ID": {
+          "key": true,
+          "type": "cds.String"
+        },
+        "name": {
+          "type": "cds.String",
+          "length": 20
+        },
+        "criticality": {
+          "type": "cds.Integer"
+        }
+      }
+    },
+    "LibraryService.Currencies": {
+      "kind": "entity",
+      "@cds.autoexpose": true,
+      "@cds.persistence.skip": "if-unused",
+      "@UI.Identification": [
+        {
+          "Value": {
+            "=": "name"
+          }
+        }
+      ],
+      "@cds.odata.valuelist": true,
+      "projection": {
+        "from": {
+          "ref": [
+            "sap.common.Currencies"
+          ]
+        }
+      },
+      "elements": {
+        "name": {
+          "@title": "{i18n>Name}",
+          "localized": true,
+          "type": "cds.String",
+          "length": 255
+        },
+        "descr": {
+          "@title": "{i18n>Description}",
+          "localized": true,
+          "type": "cds.String",
+          "length": 1000
+        },
+        "code": {
+          "@title": "{i18n>CurrencyCode}",
+          "@Common.Text": {
+            "=": "name"
+          },
+          "key": true,
+          "type": "cds.String",
+          "length": 3
+        },
+        "symbol": {
+          "@title": "{i18n>CurrencySymbol}",
+          "type": "cds.String",
+          "length": 5
+        },
+        "minorUnit": {
+          "@title": "{i18n>CurrencyMinorUnit}",
+          "type": "cds.Int16"
+        },
+        "numcode": {
+          "type": "cds.Integer"
+        },
+        "exponent": {
+          "type": "cds.Integer"
+        },
+        "minor": {
+          "type": "cds.String"
+        },
+        "texts": {
+          "type": "cds.Composition",
+          "cardinality": {
+            "max": "*"
+          },
+          "target": "LibraryService.Currencies.texts",
+          "on": [
+            {
+              "ref": [
+                "texts",
+                "code"
+              ]
+            },
+            "=",
+            {
+              "ref": [
+                "code"
+              ]
+            }
+          ]
+        },
+        "localized": {
+          "type": "cds.Association",
+          "target": "LibraryService.Currencies.texts",
+          "on": [
+            {
+              "ref": [
+                "localized",
+                "code"
+              ]
+            },
+            "=",
+            {
+              "ref": [
+                "code"
+              ]
+            },
+            "and",
+            {
+              "ref": [
+                "localized",
+                "locale"
+              ]
+            },
+            "=",
+            {
+              "ref": [
+                "$user",
+                "locale"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "Language": {
+      "kind": "type",
+      "@title": "{i18n>Language}",
+      "@description": "{i18n>LanguageCode.Description}",
+      "type": "cds.Association",
+      "target": "sap.common.Languages",
+      "keys": [
+        {
+          "ref": [
+            "code"
+          ]
+        }
+      ]
+    },
+    "Currency": {
+      "kind": "type",
+      "@title": "{i18n>Currency}",
+      "@description": "{i18n>CurrencyCode.Description}",
+      "type": "cds.Association",
+      "target": "sap.common.Currencies",
+      "keys": [
+        {
+          "ref": [
+            "code"
+          ]
+        }
+      ]
+    },
+    "Country": {
+      "kind": "type",
+      "@title": "{i18n>Country}",
+      "@description": "{i18n>CountryCode.Description}",
+      "type": "cds.Association",
+      "target": "sap.common.Countries",
+      "keys": [
+        {
+          "ref": [
+            "code"
+          ]
+        }
+      ]
+    },
+    "sap.common": {
+      "kind": "context"
+    },
+    "sap.common.Locale": {
+      "kind": "type",
+      "@title": "{i18n>LanguageCode}",
+      "type": "cds.String",
+      "length": 14
+    },
+    "sap.common.Languages": {
+      "kind": "entity",
+      "@cds.autoexpose": true,
+      "@cds.persistence.skip": "if-unused",
+      "@UI.Identification": [
+        {
+          "Value": {
+            "=": "name"
+          }
+        }
+      ],
+      "@cds.odata.valuelist": true,
+      "includes": [
+        "sap.common.CodeList"
+      ],
+      "elements": {
+        "name": {
+          "@title": "{i18n>Name}",
+          "localized": true,
+          "type": "cds.String",
+          "length": 255
+        },
+        "descr": {
+          "@title": "{i18n>Description}",
+          "localized": true,
+          "type": "cds.String",
+          "length": 1000
+        },
+        "code": {
+          "@Common.Text": {
+            "=": "name"
+          },
+          "@title": "{i18n>LanguageCode}",
+          "key": true,
+          "type": "sap.common.Locale",
+          "length": 14
+        },
+        "texts": {
+          "type": "cds.Composition",
+          "cardinality": {
+            "max": "*"
+          },
+          "target": "sap.common.Languages.texts",
+          "on": [
+            {
+              "ref": [
+                "texts",
+                "code"
+              ]
+            },
+            "=",
+            {
+              "ref": [
+                "code"
+              ]
+            }
+          ]
+        },
+        "localized": {
+          "type": "cds.Association",
+          "target": "sap.common.Languages.texts",
+          "on": [
+            {
+              "ref": [
+                "localized",
+                "code"
+              ]
+            },
+            "=",
+            {
+              "ref": [
+                "code"
+              ]
+            },
+            "and",
+            {
+              "ref": [
+                "localized",
+                "locale"
+              ]
+            },
+            "=",
+            {
+              "ref": [
+                "$user",
+                "locale"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "sap.common.Countries": {
+      "kind": "entity",
+      "@cds.autoexpose": true,
+      "@cds.persistence.skip": "if-unused",
+      "@UI.Identification": [
+        {
+          "Value": {
+            "=": "name"
+          }
+        }
+      ],
+      "@cds.odata.valuelist": true,
+      "includes": [
+        "sap.common.CodeList"
+      ],
+      "elements": {
+        "name": {
+          "@title": "{i18n>Name}",
+          "localized": true,
+          "type": "cds.String",
+          "length": 255
+        },
+        "descr": {
+          "@title": "{i18n>Description}",
+          "localized": true,
+          "type": "cds.String",
+          "length": 1000
+        },
+        "code": {
+          "@title": "{i18n>CountryCode}",
+          "@Common.Text": {
+            "=": "name"
+          },
+          "key": true,
+          "type": "cds.String",
+          "length": 3
+        },
+        "texts": {
+          "type": "cds.Composition",
+          "cardinality": {
+            "max": "*"
+          },
+          "target": "sap.common.Countries.texts",
+          "on": [
+            {
+              "ref": [
+                "texts",
+                "code"
+              ]
+            },
+            "=",
+            {
+              "ref": [
+                "code"
+              ]
+            }
+          ]
+        },
+        "localized": {
+          "type": "cds.Association",
+          "target": "sap.common.Countries.texts",
+          "on": [
+            {
+              "ref": [
+                "localized",
+                "code"
+              ]
+            },
+            "=",
+            {
+              "ref": [
+                "code"
+              ]
+            },
+            "and",
+            {
+              "ref": [
+                "localized",
+                "locale"
+              ]
+            },
+            "=",
+            {
+              "ref": [
+                "$user",
+                "locale"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "sap.common.Currencies": {
+      "kind": "entity",
+      "@cds.autoexpose": true,
+      "@cds.persistence.skip": "if-unused",
+      "@UI.Identification": [
+        {
+          "Value": {
+            "=": "name"
+          }
+        }
+      ],
+      "@cds.odata.valuelist": true,
+      "includes": [
+        "sap.common.CodeList"
+      ],
+      "elements": {
+        "name": {
+          "@title": "{i18n>Name}",
+          "localized": true,
+          "type": "cds.String",
+          "length": 255
+        },
+        "descr": {
+          "@title": "{i18n>Description}",
+          "localized": true,
+          "type": "cds.String",
+          "length": 1000
+        },
+        "code": {
+          "@title": "{i18n>CurrencyCode}",
+          "@Common.Text": {
+            "=": "name"
+          },
+          "key": true,
+          "type": "cds.String",
+          "length": 3
+        },
+        "symbol": {
+          "@title": "{i18n>CurrencySymbol}",
+          "type": "cds.String",
+          "length": 5
+        },
+        "minorUnit": {
+          "@title": "{i18n>CurrencyMinorUnit}",
+          "type": "cds.Int16"
+        },
+        "numcode": {
+          "type": "cds.Integer"
+        },
+        "exponent": {
+          "type": "cds.Integer"
+        },
+        "minor": {
+          "type": "cds.String"
+        },
+        "texts": {
+          "type": "cds.Composition",
+          "cardinality": {
+            "max": "*"
+          },
+          "target": "sap.common.Currencies.texts",
+          "on": [
+            {
+              "ref": [
+                "texts",
+                "code"
+              ]
+            },
+            "=",
+            {
+              "ref": [
+                "code"
+              ]
+            }
+          ]
+        },
+        "localized": {
+          "type": "cds.Association",
+          "target": "sap.common.Currencies.texts",
+          "on": [
+            {
+              "ref": [
+                "localized",
+                "code"
+              ]
+            },
+            "=",
+            {
+              "ref": [
+                "code"
+              ]
+            },
+            "and",
+            {
+              "ref": [
+                "localized",
+                "locale"
+              ]
+            },
+            "=",
+            {
+              "ref": [
+                "$user",
+                "locale"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "sap.common.CodeList": {
+      "kind": "aspect",
+      "@cds.autoexpose": true,
+      "@cds.persistence.skip": "if-unused",
+      "@UI.Identification": [
+        {
+          "Value": {
+            "=": "name"
+          }
+        }
+      ],
+      "@cds.odata.valuelist": true,
+      "elements": {
+        "name": {
+          "@title": "{i18n>Name}",
+          "localized": true,
+          "type": "cds.String",
+          "length": 255
+        },
+        "descr": {
+          "@title": "{i18n>Description}",
+          "localized": true,
+          "type": "cds.String",
+          "length": 1000
+        }
+      }
+    },
+    "sap.common.TextsAspect": {
+      "kind": "aspect",
+      "elements": {
+        "locale": {
+          "@title": "{i18n>LanguageCode}",
+          "key": true,
+          "type": "sap.common.Locale",
+          "length": 14
+        }
+      }
+    },
+    "cuid": {
+      "kind": "aspect",
+      "elements": {
+        "ID": {
+          "key": true,
+          "type": "cds.UUID"
+        }
+      }
+    },
+    "managed": {
+      "kind": "aspect",
+      "elements": {
+        "createdAt": {
+          "@cds.on.insert": {
+            "=": "$now"
+          },
+          "@UI.HiddenFilter": true,
+          "@Core.Immutable": true,
+          "@title": "{i18n>CreatedAt}",
+          "@readonly": true,
+          "type": "cds.Timestamp"
+        },
+        "createdBy": {
+          "@cds.on.insert": {
+            "=": "$user"
+          },
+          "@UI.HiddenFilter": true,
+          "@Core.Immutable": true,
+          "@title": "{i18n>CreatedBy}",
+          "@readonly": true,
+          "@description": "{i18n>UserID.Description}",
+          "type": "User",
+          "length": 255
+        },
+        "modifiedAt": {
+          "@cds.on.insert": {
+            "=": "$now"
+          },
+          "@cds.on.update": {
+            "=": "$now"
+          },
+          "@UI.HiddenFilter": true,
+          "@title": "{i18n>ChangedAt}",
+          "@readonly": true,
+          "type": "cds.Timestamp"
+        },
+        "modifiedBy": {
+          "@cds.on.insert": {
+            "=": "$user"
+          },
+          "@cds.on.update": {
+            "=": "$user"
+          },
+          "@UI.HiddenFilter": true,
+          "@title": "{i18n>ChangedBy}",
+          "@readonly": true,
+          "@description": "{i18n>UserID.Description}",
+          "type": "User",
+          "length": 255
+        }
+      }
+    },
+    "temporal": {
+      "kind": "aspect",
+      "elements": {
+        "validFrom": {
+          "@cds.valid.from": true,
+          "type": "cds.Timestamp"
+        },
+        "validTo": {
+          "@cds.valid.to": true,
+          "type": "cds.Timestamp"
+        }
+      }
+    },
+    "User": {
+      "kind": "type",
+      "@title": "{i18n>UserID}",
+      "@description": "{i18n>UserID.Description}",
+      "type": "cds.String",
+      "length": 255
+    },
+    "extensible": {
+      "kind": "aspect",
+      "elements": {
+        "extensions__": {
+          "@cds.api.ignore": true,
+          "type": "cds.String"
+        }
+      }
+    },
+    "sap.common.Languages.texts": {
+      "kind": "entity",
+      "@odata.draft.enabled": false,
+      "includes": [
+        "sap.common.TextsAspect"
+      ],
+      "elements": {
+        "locale": {
+          "@title": "{i18n>LanguageCode}",
+          "key": true,
+          "type": "sap.common.Locale",
+          "length": 14
+        },
+        "name": {
+          "@title": "{i18n>Name}",
+          "localized": null,
+          "type": "cds.String",
+          "length": 255
+        },
+        "descr": {
+          "@title": "{i18n>Description}",
+          "localized": null,
+          "type": "cds.String",
+          "length": 1000
+        },
+        "code": {
+          "@odata.containment.ignore": true,
+          "@Common.Text": {
+            "=": "name"
+          },
+          "@title": "{i18n>LanguageCode}",
+          "key": true,
+          "type": "sap.common.Locale",
+          "length": 14
+        }
+      }
+    },
+    "sap.common.Countries.texts": {
+      "kind": "entity",
+      "@odata.draft.enabled": false,
+      "includes": [
+        "sap.common.TextsAspect"
+      ],
+      "elements": {
+        "locale": {
+          "@title": "{i18n>LanguageCode}",
+          "key": true,
+          "type": "sap.common.Locale",
+          "length": 14
+        },
+        "name": {
+          "@title": "{i18n>Name}",
+          "localized": null,
+          "type": "cds.String",
+          "length": 255
+        },
+        "descr": {
+          "@title": "{i18n>Description}",
+          "localized": null,
+          "type": "cds.String",
+          "length": 1000
+        },
+        "code": {
+          "@odata.containment.ignore": true,
+          "@title": "{i18n>CountryCode}",
+          "@Common.Text": {
+            "=": "name"
+          },
+          "key": true,
+          "type": "cds.String",
+          "length": 3
+        }
+      }
+    },
+    "sap.common.Currencies.texts": {
+      "kind": "entity",
+      "@odata.draft.enabled": false,
+      "includes": [
+        "sap.common.TextsAspect"
+      ],
+      "elements": {
+        "locale": {
+          "@title": "{i18n>LanguageCode}",
+          "key": true,
+          "type": "sap.common.Locale",
+          "length": 14
+        },
+        "name": {
+          "@title": "{i18n>Name}",
+          "localized": null,
+          "type": "cds.String",
+          "length": 255
+        },
+        "descr": {
+          "@title": "{i18n>Description}",
+          "localized": null,
+          "type": "cds.String",
+          "length": 1000
+        },
+        "code": {
+          "@odata.containment.ignore": true,
+          "@title": "{i18n>CurrencyCode}",
+          "@Common.Text": {
+            "=": "name"
+          },
+          "key": true,
+          "type": "cds.String",
+          "length": 3
+        }
+      }
+    },
+    "LibraryService.Currencies.texts": {
+      "kind": "entity",
+      "@cds.autoexposed": true,
+      "@odata.draft.enabled": false,
+      "projection": {
+        "from": {
+          "ref": [
+            "sap.common.Currencies.texts"
+          ]
+        }
+      },
+      "elements": {
+        "locale": {
+          "@title": "{i18n>LanguageCode}",
+          "key": true,
+          "type": "sap.common.Locale",
+          "length": 14
+        },
+        "name": {
+          "@title": "{i18n>Name}",
+          "localized": null,
+          "type": "cds.String",
+          "length": 255
+        },
+        "descr": {
+          "@title": "{i18n>Description}",
+          "localized": null,
+          "type": "cds.String",
+          "length": 1000
+        },
+        "code": {
+          "@odata.containment.ignore": true,
+          "@title": "{i18n>CurrencyCode}",
+          "@Common.Text": {
+            "=": "name"
+          },
+          "key": true,
+          "type": "cds.String",
+          "length": 3
+        }
+      }
+    }
+  },
+  "extensions": [
+    {
+      "annotate": "epam.sap.dev.library.Books",
+      "elements": {
+        "requestedQty": {
+          "@title": "{i18n>requestedQuantity}"
+        }
+      }
+    }
+  ],
+  "meta": {
+    "creator": "CDS Compiler v3.9.2",
+    "flavor": "inferred"
+  },
+  "$version": "2.0"
+}

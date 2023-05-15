@@ -1,0 +1,21 @@
+VIEW localized_epam_sap_dev_library_Booking AS SELECT
+  L.createdAt,
+  L.createdBy,
+  L.modifiedAt,
+  L.modifiedBy,
+  L.bookingUUID,
+  L.bookingID,
+  L.readerID_readerUUID,
+  L.bookID_bookUUID,
+  L.bookingStatus_ID,
+  L.beginDate,
+  L.beginTime,
+  L.endDate,
+  L.endTime,
+  L.image
+FROM epam_sap_dev_library_Booking AS L
+WITH ASSOCIATIONS (
+  MANY TO ONE JOIN epam_sap_dev_library_Readers AS readerID ON (readerID.readerUUID = readerID_readerUUID),
+  MANY TO ONE JOIN localized_epam_sap_dev_library_Books AS bookID ON (bookID.bookUUID = bookID_bookUUID),
+  MANY TO ONE JOIN masterdata_Statuses AS bookingStatus ON (bookingStatus.ID = bookingStatus_ID)
+)

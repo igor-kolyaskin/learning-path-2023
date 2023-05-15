@@ -1,0 +1,21 @@
+COLUMN TABLE LibraryService_Authors_drafts (
+  createdAt TIMESTAMP NULL,
+  createdBy NVARCHAR(255) NULL,
+  modifiedAt TIMESTAMP NULL,
+  modifiedBy NVARCHAR(255) NULL,
+  authorUUID NVARCHAR(36) NOT NULL,
+  authorID INTEGER NULL,
+  firstName NVARCHAR(15) NULL,
+  lastName NVARCHAR(15) NULL,
+  birthday DATE NULL,
+  country NVARCHAR(30) NULL,
+  image BLOB NULL,
+  IsActiveEntity BOOLEAN,
+  HasActiveEntity BOOLEAN,
+  HasDraftEntity BOOLEAN,
+  DraftAdministrativeData_DraftUUID NVARCHAR(36) NOT NULL,
+  PRIMARY KEY(authorUUID)
+) WITH ASSOCIATIONS (
+  MANY TO MANY JOIN LibraryService_Books AS book ON (book.toAuthor_authorUUID = authorUUID),
+  MANY TO ONE JOIN LibraryService_DraftAdministrativeData AS DraftAdministrativeData ON (DraftAdministrativeData.DraftUUID = DraftAdministrativeData_DraftUUID)
+)

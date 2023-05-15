@@ -1,0 +1,13 @@
+VIEW LibraryService_Readers AS SELECT
+  Readers_0.createdAt,
+  Readers_0.createdBy,
+  Readers_0.modifiedAt,
+  Readers_0.modifiedBy,
+  Readers_0.readerUUID,
+  Readers_0.readerID,
+  Readers_0.firstName,
+  Readers_0.lastName,
+  Readers_0.readerBithday,
+  Readers_0.phonenumber,
+  Readers_0.image
+FROM epam_sap_dev_library_Readers AS Readers_0

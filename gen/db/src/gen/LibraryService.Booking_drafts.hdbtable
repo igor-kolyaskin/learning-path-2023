@@ -1,0 +1,26 @@
+COLUMN TABLE LibraryService_Booking_drafts (
+  createdAt TIMESTAMP NULL,
+  createdBy NVARCHAR(255) NULL,
+  modifiedAt TIMESTAMP NULL,
+  modifiedBy NVARCHAR(255) NULL,
+  bookingUUID NVARCHAR(36) NOT NULL,
+  bookingID INTEGER NULL,
+  readerID_readerUUID NVARCHAR(36) NULL,
+  bookID_bookUUID NVARCHAR(36) NULL,
+  bookingStatus_ID NVARCHAR(5000) NULL,
+  beginDate DATE NULL,
+  beginTime TIME NULL,
+  endDate DATE NULL,
+  endTime TIME NULL,
+  image BLOB NULL,
+  IsActiveEntity BOOLEAN,
+  HasActiveEntity BOOLEAN,
+  HasDraftEntity BOOLEAN,
+  DraftAdministrativeData_DraftUUID NVARCHAR(36) NOT NULL,
+  PRIMARY KEY(bookingUUID)
+) WITH ASSOCIATIONS (
+  MANY TO ONE JOIN LibraryService_Readers AS readerID ON (readerID.readerUUID = readerID_readerUUID),
+  MANY TO ONE JOIN LibraryService_Books AS bookID ON (bookID.bookUUID = bookID_bookUUID),
+  MANY TO ONE JOIN LibraryService_Statuses AS bookingStatus ON (bookingStatus.ID = bookingStatus_ID),
+  MANY TO ONE JOIN LibraryService_DraftAdministrativeData AS DraftAdministrativeData ON (DraftAdministrativeData.DraftUUID = DraftAdministrativeData_DraftUUID)
+)

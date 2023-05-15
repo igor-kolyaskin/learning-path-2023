@@ -1,0 +1,22 @@
+COLUMN TABLE epam_sap_dev_library_Books (
+  createdAt TIMESTAMP,
+  createdBy NVARCHAR(255),
+  modifiedAt TIMESTAMP,
+  modifiedBy NVARCHAR(255),
+  bookUUID NVARCHAR(36) NOT NULL,
+  toAuthor_authorUUID NVARCHAR(36),
+  bookID INTEGER,
+  bookName NVARCHAR(60),
+  pageNumber INTEGER,
+  copyQty INTEGER,
+  shippedQty INTEGER,
+  price DECIMAL(15, 2),
+  CurrencyCode_code NVARCHAR(3),
+  status_ID NVARCHAR(5000),
+  image BLOB,
+  PRIMARY KEY(bookUUID)
+) WITH ASSOCIATIONS (
+  MANY TO ONE JOIN epam_sap_dev_library_Authors AS toAuthor ON (toAuthor.authorUUID = toAuthor_authorUUID),
+  MANY TO ONE JOIN sap_common_Currencies AS CurrencyCode ON (CurrencyCode.code = CurrencyCode_code),
+  MANY TO ONE JOIN masterdata_BookStatuses AS status ON (status.ID = status_ID)
+)

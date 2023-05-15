@@ -1,0 +1,22 @@
+VIEW LibraryService_Books AS SELECT
+  Books_0.createdAt,
+  Books_0.createdBy,
+  Books_0.modifiedAt,
+  Books_0.modifiedBy,
+  Books_0.bookUUID,
+  Books_0.toAuthor_authorUUID,
+  Books_0.bookID,
+  Books_0.bookName,
+  Books_0.pageNumber,
+  Books_0.copyQty,
+  Books_0.shippedQty,
+  Books_0.price,
+  Books_0.CurrencyCode_code,
+  Books_0.status_ID,
+  Books_0.image
+FROM epam_sap_dev_library_Books AS Books_0
+WITH ASSOCIATIONS (
+  MANY TO ONE JOIN LibraryService_Authors AS toAuthor ON (toAuthor.authorUUID = toAuthor_authorUUID),
+  MANY TO ONE JOIN LibraryService_Currencies AS CurrencyCode ON (CurrencyCode.code = CurrencyCode_code),
+  MANY TO ONE JOIN LibraryService_BookStatuses AS status ON (status.ID = status_ID)
+)

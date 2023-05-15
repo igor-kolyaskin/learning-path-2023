@@ -1,0 +1,27 @@
+COLUMN TABLE LibraryService_Books_drafts (
+  createdAt TIMESTAMP NULL,
+  createdBy NVARCHAR(255) NULL,
+  modifiedAt TIMESTAMP NULL,
+  modifiedBy NVARCHAR(255) NULL,
+  bookUUID NVARCHAR(36) NOT NULL,
+  toAuthor_authorUUID NVARCHAR(36) NULL,
+  bookID INTEGER NULL,
+  bookName NVARCHAR(60) NULL,
+  pageNumber INTEGER NULL,
+  copyQty INTEGER NULL,
+  shippedQty INTEGER NULL,
+  price DECIMAL(15, 2) NULL,
+  CurrencyCode_code NVARCHAR(3) NULL,
+  status_ID NVARCHAR(5000) NULL,
+  image BLOB NULL,
+  IsActiveEntity BOOLEAN,
+  HasActiveEntity BOOLEAN,
+  HasDraftEntity BOOLEAN,
+  DraftAdministrativeData_DraftUUID NVARCHAR(36) NOT NULL,
+  PRIMARY KEY(bookUUID)
+) WITH ASSOCIATIONS (
+  MANY TO ONE JOIN LibraryService_Authors AS toAuthor ON (toAuthor.authorUUID = toAuthor_authorUUID),
+  MANY TO ONE JOIN LibraryService_Currencies AS CurrencyCode ON (CurrencyCode.code = CurrencyCode_code),
+  MANY TO ONE JOIN LibraryService_BookStatuses AS status ON (status.ID = status_ID),
+  MANY TO ONE JOIN LibraryService_DraftAdministrativeData AS DraftAdministrativeData ON (DraftAdministrativeData.DraftUUID = DraftAdministrativeData_DraftUUID)
+)

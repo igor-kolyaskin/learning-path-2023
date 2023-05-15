@@ -1,0 +1,21 @@
+COLUMN TABLE epam_sap_dev_library_Booking (
+  createdAt TIMESTAMP,
+  createdBy NVARCHAR(255),
+  modifiedAt TIMESTAMP,
+  modifiedBy NVARCHAR(255),
+  bookingUUID NVARCHAR(36) NOT NULL,
+  bookingID INTEGER,
+  readerID_readerUUID NVARCHAR(36),
+  bookID_bookUUID NVARCHAR(36),
+  bookingStatus_ID NVARCHAR(5000),
+  beginDate DATE,
+  beginTime TIME,
+  endDate DATE,
+  endTime TIME,
+  image BLOB,
+  PRIMARY KEY(bookingUUID)
+) WITH ASSOCIATIONS (
+  MANY TO ONE JOIN epam_sap_dev_library_Readers AS readerID ON (readerID.readerUUID = readerID_readerUUID),
+  MANY TO ONE JOIN epam_sap_dev_library_Books AS bookID ON (bookID.bookUUID = bookID_bookUUID),
+  MANY TO ONE JOIN masterdata_Statuses AS bookingStatus ON (bookingStatus.ID = bookingStatus_ID)
+)

@@ -1,0 +1,41 @@
+{
+  "format_version": 1,
+  "imports": [
+    {
+      "target_table": "EPAM_SAP_DEV_LIBRARY_BOOKS",
+      "source_data": {
+        "data_type": "CSV",
+        "file_name": "epam.sap.dev.library-Books.csv",
+        "has_header": true,
+        "type_config": {
+          "delimiter": ";"
+        }
+      },
+      "import_settings": {
+        "import_columns": [
+          "BOOKUUID",
+          "BOOKID",
+          "TOAUTHOR_AUTHORUUID",
+          "BOOKNAME",
+          "PAGENUMBER",
+          "COPYQTY",
+          "PRICE",
+          "CURRENCYCODE_CODE",
+          "STATUS_ID"
+        ],
+        "include_filter": []
+      },
+      "column_mappings": {
+        "BOOKUUID": "bookUUID",
+        "BOOKID": "bookID",
+        "TOAUTHOR_AUTHORUUID": "toAuthor_authorUUID",
+        "BOOKNAME": "bookName",
+        "PAGENUMBER": "pageNumber",
+        "COPYQTY": "copyQtY",
+        "PRICE": "price",
+        "CURRENCYCODE_CODE": "CurrencyCode_code",
+        "STATUS_ID": "status_ID"
+      }
+    }
+  ]
+}

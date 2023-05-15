@@ -1,0 +1,5 @@
+VIEW LibraryService_BookStatuses AS SELECT
+  BookStatuses_0.ID,
+  BookStatuses_0.name,
+  BookStatuses_0.criticality
+FROM masterdata_BookStatuses AS BookStatuses_0

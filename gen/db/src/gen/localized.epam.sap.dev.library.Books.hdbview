@@ -1,0 +1,22 @@
+VIEW localized_epam_sap_dev_library_Books AS SELECT
+  L.createdAt,
+  L.createdBy,
+  L.modifiedAt,
+  L.modifiedBy,
+  L.bookUUID,
+  L.toAuthor_authorUUID,
+  L.bookID,
+  L.bookName,
+  L.pageNumber,
+  L.copyQty,
+  L.shippedQty,
+  L.price,
+  L.CurrencyCode_code,
+  L.status_ID,
+  L.image
+FROM epam_sap_dev_library_Books AS L
+WITH ASSOCIATIONS (
+  MANY TO ONE JOIN localized_epam_sap_dev_library_Authors AS toAuthor ON (toAuthor.authorUUID = toAuthor_authorUUID),
+  MANY TO ONE JOIN localized_sap_common_Currencies AS CurrencyCode ON (CurrencyCode.code = CurrencyCode_code),
+  MANY TO ONE JOIN masterdata_BookStatuses AS status ON (status.ID = status_ID)
+)

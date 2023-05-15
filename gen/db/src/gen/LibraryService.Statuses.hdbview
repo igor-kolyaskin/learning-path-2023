@@ -1,0 +1,5 @@
+VIEW LibraryService_Statuses AS SELECT
+  Statuses_0.ID,
+  Statuses_0.name,
+  Statuses_0.criticality
+FROM masterdata_Statuses AS Statuses_0

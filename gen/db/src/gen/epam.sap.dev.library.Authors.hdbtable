@@ -1,0 +1,16 @@
+COLUMN TABLE epam_sap_dev_library_Authors (
+  createdAt TIMESTAMP,
+  createdBy NVARCHAR(255),
+  modifiedAt TIMESTAMP,
+  modifiedBy NVARCHAR(255),
+  authorUUID NVARCHAR(36) NOT NULL,
+  authorID INTEGER,
+  firstName NVARCHAR(15),
+  lastName NVARCHAR(15),
+  birthday DATE,
+  country NVARCHAR(30),
+  image BLOB,
+  PRIMARY KEY(authorUUID)
+) WITH ASSOCIATIONS (
+  MANY TO MANY JOIN epam_sap_dev_library_Books AS book ON (book.toAuthor_authorUUID = authorUUID)
+)

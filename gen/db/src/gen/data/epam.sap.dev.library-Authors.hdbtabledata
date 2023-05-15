@@ -1,0 +1,35 @@
+{
+  "format_version": 1,
+  "imports": [
+    {
+      "target_table": "EPAM_SAP_DEV_LIBRARY_AUTHORS",
+      "source_data": {
+        "data_type": "CSV",
+        "file_name": "epam.sap.dev.library-Authors.csv",
+        "has_header": true,
+        "type_config": {
+          "delimiter": ";"
+        }
+      },
+      "import_settings": {
+        "import_columns": [
+          "AUTHORUUID",
+          "AUTHORID",
+          "FIRSTNAME",
+          "LASTNAME",
+          "COUNTRY",
+          "BIRTHDAY"
+        ],
+        "include_filter": []
+      },
+      "column_mappings": {
+        "AUTHORUUID": "authorUUID",
+        "AUTHORID": "authorID",
+        "FIRSTNAME": "firstName",
+        "LASTNAME": "lastName",
+        "COUNTRY": "country",
+        "BIRTHDAY": "birthday"
+      }
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+COLUMN TABLE epam_sap_dev_library_Readers (
+  createdAt TIMESTAMP,
+  createdBy NVARCHAR(255),
+  modifiedAt TIMESTAMP,
+  modifiedBy NVARCHAR(255),
+  readerUUID NVARCHAR(36) NOT NULL,
+  readerID INTEGER,
+  firstName NVARCHAR(15),
+  lastName NVARCHAR(15),
+  readerBithday DATE,
+  phonenumber NVARCHAR(15),
+  image BLOB,
+  PRIMARY KEY(readerUUID)
+)

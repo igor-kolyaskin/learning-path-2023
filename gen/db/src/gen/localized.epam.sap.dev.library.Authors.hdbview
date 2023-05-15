@@ -1,0 +1,16 @@
+VIEW localized_epam_sap_dev_library_Authors AS SELECT
+  L.createdAt,
+  L.createdBy,
+  L.modifiedAt,
+  L.modifiedBy,
+  L.authorUUID,
+  L.authorID,
+  L.firstName,
+  L.lastName,
+  L.birthday,
+  L.country,
+  L.image
+FROM epam_sap_dev_library_Authors AS L
+WITH ASSOCIATIONS (
+  MANY TO MANY JOIN localized_epam_sap_dev_library_Books AS book ON (book.toAuthor_authorUUID = authorUUID)
+)
