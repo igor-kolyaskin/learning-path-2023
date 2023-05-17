@@ -123,8 +123,8 @@ resources:
   - name: cap-library-app-db
     type: com.sap.xs.hdi-container
     parameters:
-      service: hanatrial
-      service-plan: securestore
+      service: hana
+      service-plan: hdi-shared
   - name: cap-library-app-destination-service
     type: org.cloudfoundry.managed-service
     parameters:
