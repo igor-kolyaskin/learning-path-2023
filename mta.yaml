@@ -34,10 +34,10 @@ modules:
         parameters:
           service-key:
             name: cap-library-app_html_repo_host-key
-      - name: uaa_cap-library-app
+      - name: dest_service
         parameters:
           service-key:
-            name: uaa_cap-library-app-key
+            name: dest_service-key
     parameters:
       content:
         instance:
@@ -47,9 +47,9 @@ modules:
               ServiceKeyName: cap-library-app_html_repo_host-key
               sap.cloud.service: caplibrary
             - Authentication: OAuth2UserTokenExchange
-              Name: caplibrary_uaa_cap_library_app
+              Name: dest_service
               ServiceInstanceName: cap-library-app-xsuaa-service
-              ServiceKeyName: uaa_cap-library-app-key
+              ServiceKeyName: dest_service-key
               sap.cloud.service: caplibrary
           existing_destinations_policy: ignore
     build-parameters:
@@ -150,7 +150,6 @@ resources:
       service: html5-apps-repo
       service-name: cap-library-app-html5-app-host-service
       service-plan: app-host
-  - name: uaa_cap-library-app
   - name: dest_service
     type: org.cloudfoundry.managed-service
     parameters:
@@ -158,9 +157,6 @@ resources:
       service: xsuaa
       service-name: cap-library-app-xsuaa-service
       service-plan: application
-parameters:
-  deploy_mode: html5-repo
-  enable-parallel-deployments: true
 build-parameters:
   before-all:
     - builder: custom
